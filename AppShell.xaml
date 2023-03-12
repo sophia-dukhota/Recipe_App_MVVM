@@ -3,7 +3,7 @@
     x:Class="_6002CEM_SophiaDukhota.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:_6002CEM_SophiaDukhota"
+    xmlns:local="clr-namespace:_6002CEM_SophiaDukhota.Views"
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
