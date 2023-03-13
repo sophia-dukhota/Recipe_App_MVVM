@@ -20,7 +20,7 @@
             <Entry TextChanged="Username_TextChanged" Placeholder="Username"/>
         </StackLayout>
         <StackLayout Grid.Row="1">
-            <Entry TextChanged="Password_TextChanged"/>
+            <Entry TextChanged="Password_TextChanged" IsPassword="True"/>
         </StackLayout>
         <StackLayout Grid.Row="2">
             <Button

@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using System.Security.Cryptography;
+using System.Windows.Input;
+using System.Text;
 //using Bumptech.Glide.Load.Model;
 
 namespace _6002CEM_SophiaDukhota.ViewModels;
@@ -8,7 +10,10 @@ public class LoginPageViewModel : BaseViewModel
 	public Models.LoginPageModel LoginPageModel { get; set; }
 	public ICommand CheckUserCredsCommand { get; set; }
 
-    private double _checkButtonWorks;
+    //config for salting and hashing the password
+    private const int saltSize = 32;
+    private const int iterations = 100000;
+    HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
 
     public string Username
     {
@@ -33,27 +38,20 @@ public class LoginPageViewModel : BaseViewModel
         }
     }
 
-    /*
-    public double checkButtonWorks
-    {
-        get => _checkButtonWorks;
-        set
-        {
-            if (_checkButtonWorks != value)
-            {
-                _checkButtonWorks = 80;
-                OnPropertyChanged(nameof(checkButtonWorks));
-            }
-        }
-    }
-
-*/
 
     //change this to use .stringIsNullOrEmpty
     private bool ShouldCheckUserCreds() => Username != "" && Password != "";
 
+    //modified from https://code-maze.com/csharp-hashing-salting-passwords-best-practices/ 
     private void CheckUserCreds() {
-        Username = "defiantly not a swear";
+        //generates a salt of length saltSize
+        var salt = RandomNumberGenerator.GetBytes(saltSize);
+        //creates a hash byte array 
+        var hash = Rfc2898DeriveBytes.Pbkdf2(
+            Encoding.UTF8.GetBytes(Password),
+            salt, iterations, hashAlgorithm, saltSize);
+        //sets password to hexstring of hash
+        Password = Convert.ToHexString(hash);
     }
 
     public LoginPageViewModel()
