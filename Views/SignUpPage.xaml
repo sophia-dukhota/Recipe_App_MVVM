@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_6002CEM_SophiaDukhota.Views.SignUpPage"
              xmlns:local="clr-namespace:_6002CEM_SophiaDukhota.ViewModels"
-             x:Class="_6002CEM_SophiaDukhota.Views.MainPage">
-
-<!-- Binding context-->
+             Title="SignUpPage">
     <ContentPage.BindingContext>
-        <local:LoginPageViewModel/>
+        <local:SignUpViewModel/>
     </ContentPage.BindingContext>
     <!--Grid definitions-->
     <Grid>
@@ -15,24 +14,23 @@
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
-
-        <!--Page layout-->
+    
         <StackLayout Grid.Row="0">
+            <Label Text="Register User"/>
             <Entry TextChanged="Username_TextChanged" Placeholder="Username"/>
         </StackLayout>
         <StackLayout Grid.Row="1">
             <Entry TextChanged="Password_TextChanged" IsPassword="True" Placeholder="Password"/>
+            <Entry TextChanged="VerifyPassword_TextChanged" IsPassword="True" Placeholder="Verify Password"/>
         </StackLayout>
         <StackLayout Grid.Row="2">
             <Button
-                x:Name="loginBtn"
-                Text="Login"
-                Command="{Binding CheckUserCredsCommand}"/>
+                x:Name="registerBtn"
+                Text="Register"
+                Command="{Binding RegisterUserCommand}"/>
             <Label Text="{Binding Username, Mode=TwoWay}"/>
             <Label Text="{Binding Password, Mode=TwoWay}"/>
-            <Button Text="Change Page" Command="{Binding GoToSignUpCommand}"/>
+            <Label Text="{Binding VerifyPassword, Mode=TwoWay}"/>
         </StackLayout>
-
     </Grid>
-
 </ContentPage>
