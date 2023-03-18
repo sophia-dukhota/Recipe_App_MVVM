@@ -7,6 +7,7 @@ public partial class App : Application
 		InitializeComponent();
 
 		Routing.RegisterRoute("SignUpPage", typeof(Views.SignUpPage));
+		Routing.RegisterRoute("MainAppPage", typeof(Views.MainAppPage));
 
 		MainPage = new AppShell();
 	}

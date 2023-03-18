@@ -31,6 +31,8 @@
             <Label Text="{Binding Username, Mode=TwoWay}"/>
             <Label Text="{Binding Password, Mode=TwoWay}"/>
             <Button Text="Change Page" Command="{Binding GoToSignUpCommand}"/>
+            <Label Text="Your password or username is incorrect"
+                IsVisible="{Binding incorrectCreds}" />
         </StackLayout>
 
     </Grid>

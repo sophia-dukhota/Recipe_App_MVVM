@@ -8,7 +8,6 @@ public class SignUpViewModel : BaseViewModel
 
     public ICommand RegisterUserCommand { get; set; }
 
-
     public string Username
     {
         get => SignUpModel.username;
