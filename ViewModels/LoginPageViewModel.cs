@@ -77,7 +77,8 @@ public class LoginPageViewModel : BaseViewModel
         {
             await GoToMainAppPage();
         }
-        else {
+        else
+        {
             incorrectCreds = true;
         }
             

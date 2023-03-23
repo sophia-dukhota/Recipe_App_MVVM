@@ -14,5 +14,10 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button x:Name="getData"
+                Text="GetData"
+                Command="{Binding GetRecipesCommand}"
+            />
+        <Label Text="{Binding TestReponse, Mode=TwoWay}"/>
     </VerticalStackLayout>
 </ContentPage>

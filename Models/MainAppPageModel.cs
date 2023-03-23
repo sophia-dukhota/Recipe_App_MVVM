@@ -2,6 +2,8 @@
 
 public class MainAppPageModel
 {
+	public string testResponse = string.Empty;
+
 	public MainAppPageModel()
 	{
 
