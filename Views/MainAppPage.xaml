@@ -17,9 +17,27 @@
         <Button x:Name="getData"
                 Text="GetData"
                 Command="{Binding GetRecipesCommand}"/>
+        <!--
+        <ListView>
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Xiao</x:String>
+                    <x:String>Venti</x:String>
+                    <x:String>Zhongli</x:String>
 
+                </x:Array>
+
+            </ListView.ItemsSource>
+
+        </ListView>-->
+        <ListView x:Name="plsWorkView">
+
+
+        </ListView>
+
+        <!--
         <Label Text="{Binding RecipesSearchModel, Mode=TwoWay}"/>
         <Label Text="{Binding RecipesSearchModel.hits[0].recipe.label}"/>
-        <Label Text="{Binding Label}"/>
+        <Label Text="{Binding Label}"/> -->
     </VerticalStackLayout>
 </ContentPage>

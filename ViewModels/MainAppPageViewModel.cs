@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 using _6002CEM_SophiaDukhota.Models;
 
 namespace _6002CEM_SophiaDukhota.ViewModels;
@@ -10,11 +11,12 @@ namespace _6002CEM_SophiaDukhota.ViewModels;
 //YOU MUST GIVE EDAMAN CREDIT
 //https://developer.edamam.com/attribution
 
-public class MainAppPageViewModel : BaseViewModel
+public partial class MainAppPageViewModel : BaseViewModel
 {
     //public Models.MainAppPageModel MainAppPageModel { get; set; }
     public ICommand GetRecipesCommand { get; set; }
     public Models.RecipesSearchModel RecipesSearchModel { get; set; }
+   
 
     public string Label
     {
@@ -38,7 +40,7 @@ public class MainAppPageViewModel : BaseViewModel
         httpClient.BaseAddress = new Uri("https://api.edamam.com/api/recipes/v2");
 
         //get request
-        var request = new HttpRequestMessage(HttpMethod.Get, "/search?q=chicken&app_id="+appId+"&app_key="+appKey);
+        var request = new HttpRequestMessage(HttpMethod.Get, "/search?q=chicken&app_id=" + appId + "&app_key=" + appKey);
         var response = await httpClient.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();
 
@@ -55,7 +57,6 @@ public class MainAppPageViewModel : BaseViewModel
         GetRecipesCommand = new Command(execute: async () => await GetResponse());
     }
 }
-
 /* protected override void OnAppearing()
 {
     base.OnAppearing();
