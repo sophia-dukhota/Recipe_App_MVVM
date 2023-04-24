@@ -30,10 +30,21 @@
             </ListView.ItemsSource>
 
         </ListView>-->
-        <ListView x:Name="plsWorkView">
+     
+        <ListView x:Name="recipeSearchView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding q}"
+                              Detail="{Binding hits[0].recipe.label}"/>
+                    
+                   <!-- <Label Text="{Binding q}"/> -->
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
 
 
-        </ListView>
+        </ListView> 
 
         <!--
         <Label Text="{Binding RecipesSearchModel, Mode=TwoWay}"/>
