@@ -16,21 +16,31 @@
         </Grid.RowDefinitions>
     
         <StackLayout Grid.Row="0">
-            <Label Text="Register User"/>
-            <Entry TextChanged="Username_TextChanged" Placeholder="Username"/>
+            <Label Text="Register"
+                   HorizontalOptions="Center"
+                   Margin="60"
+                   SemanticProperties.HeadingLevel="Level1"
+                   FontSize="Large"
+                   FontAttributes="Bold"/>
         </StackLayout>
+
         <StackLayout Grid.Row="1">
-            <Entry TextChanged="Password_TextChanged" IsPassword="True" Placeholder="Password"/>
-            <Entry TextChanged="VerifyPassword_TextChanged" IsPassword="True" Placeholder="Verify Password"/>
-        </StackLayout>
-        <StackLayout Grid.Row="2">
+            <Entry TextChanged="Username_TextChanged" Placeholder="Username" Margin="10"/>
+            <Entry TextChanged="Password_TextChanged" IsPassword="True" Placeholder="Password" Margin="10"/>
+            <Entry TextChanged="VerifyPassword_TextChanged" IsPassword="True" Placeholder="Verify Password" Margin="10"/>
+
             <Button
                 x:Name="registerBtn"
                 Text="Register"
+                CornerRadius="20"
+                Margin="10"
                 Command="{Binding RegisterUserCommand}"/>
+
+            <!-- This is for testing purposes-->
             <Label Text="{Binding Username, Mode=TwoWay}"/>
             <Label Text="{Binding Password, Mode=TwoWay}"/>
             <Label Text="{Binding VerifyPassword, Mode=TwoWay}"/>
+
         </StackLayout>
     </Grid>
 </ContentPage>

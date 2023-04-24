@@ -16,8 +16,10 @@
             HorizontalOptions="Center" />
         <Button x:Name="getData"
                 Text="GetData"
-                Command="{Binding GetRecipesCommand}"
-            />
-        <Label Text="{Binding TestReponse, Mode=TwoWay}"/>
+                Command="{Binding GetRecipesCommand}"/>
+
+        <Label Text="{Binding RecipesSearchModel, Mode=TwoWay}"/>
+        <Label Text="{Binding RecipesSearchModel.hits[0].recipe.label}"/>
+        <Label Text="{Binding Label}"/>
     </VerticalStackLayout>
 </ContentPage>

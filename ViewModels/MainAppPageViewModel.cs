@@ -12,19 +12,21 @@ namespace _6002CEM_SophiaDukhota.ViewModels;
 
 public class MainAppPageViewModel : BaseViewModel
 {
-    public Models.MainAppPageModel MainAppPageModel { get; set; }
+    //public Models.MainAppPageModel MainAppPageModel { get; set; }
     public ICommand GetRecipesCommand { get; set; }
+    public Models.RecipesSearchModel RecipesSearchModel { get; set; }
 
-    /*public string ingredient
+    public string Label
     {
-        get => responseModel.;
+        get => RecipesSearchModel.hits[0].recipe.label;
         set
         {
-            MainAppPageModel.testResponse = value;
-            OnPropertyChanged(nameof(TestReponse));
+            //var hits = RecipesSearchModel.hits[0].recipe.label = value;
+            RecipesSearchModel.hits[0].recipe.label = value;
+            OnPropertyChanged(nameof(Label));
             (GetRecipesCommand as Command).ChangeCanExecute();
         }
-    }*/
+    }
 
     public async Task<RecipesSearchModel> GetResponse() {
         //api keys
@@ -40,13 +42,16 @@ public class MainAppPageViewModel : BaseViewModel
         var response = await httpClient.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();
 
-        var responseModel = JsonSerializer.Deserialize<RecipesSearchModel>(responseString);
-        return responseModel;
+        //var responseModel = JsonSerializer.Deserialize<RecipesSearchModel>(responseString);
+        RecipesSearchModel = JsonSerializer.Deserialize<RecipesSearchModel>(responseString);
+        //return responseModel;
+        return RecipesSearchModel;
     }
 
     public MainAppPageViewModel()
     {
-        MainAppPageModel = new Models.MainAppPageModel();
+        //MainAppPageModel = new Models.MainAppPageModel();
+        RecipesSearchModel = new Models.RecipesSearchModel();
         GetRecipesCommand = new Command(execute: async () => await GetResponse());
     }
 }
