@@ -2,42 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="_6002CEM_SophiaDukhota.Views.MainAppPage"
+             xmlns:model="clr-namespace:_6002CEM_SophiaDukhota.Models"
              xmlns:local="clr-namespace:_6002CEM_SophiaDukhota.ViewModels"
-             Title="MainAppPage">
-
+             x:DataType="local:MainAppPageViewModel"
+             Title="Main Page">
+<!--
     <ContentPage.BindingContext>
         <local:MainAppPageViewModel/>
     </ContentPage.BindingContext>
+    -->
 
-    <VerticalStackLayout>
+
+    <!--
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
         <Button x:Name="getData"
                 Text="GetData"
-                Command="{Binding GetRecipesCommand}"/>
-     
-        <ListView x:Name="recipeSearchView">
+                Command="{Binding GetRecipesCommand}"/> -->
+    <Grid
+        ColumnDefinitions="*, *"
+        ColumnSpacing="5"
+        RowDefinitions="*, Auto"
+        RowSpacing="0">
+
+        <Button Grid.Column="0"
+                Grid.Row="1"
+        x:Name="getData"
+        Text="GetData"
+        IsEnabled="{Binding IsNotBusy}"
+        Command="{Binding GetRecipesCommand}"/>
+
+        <CollectionView ItemsSource="{Binding recipes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Recipe">
+                    <Label Text="{Binding label}"/>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+        
+
+<!--
+        <ListView ItemsSource="{Binding recipesSearchModel}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding recipe.uri}"
-                              Detail="{Binding recipe.label}"/>
-                   <!-- <TextCell Text="{Binding hits[0].recipe.label}"
-                              Detail="{Binding hits[0].recipe.label}"/> -->
-                    
-                   <!-- <Label Text="{Binding q}"/> -->
+                    <TextCell Text="{Binding recipesSearchModel.q}"/>
 
                 </DataTemplate>
 
             </ListView.ItemTemplate>
 
-
         </ListView> 
+     
+     -->
 
-        <!--
-        <Label Text="{Binding RecipesSearchModel, Mode=TwoWay}"/>
+        
+       <!-- <Label Text="{Binding RecipesSearchModel, Mode=TwoWay}"/>
         <Label Text="{Binding RecipesSearchModel.hits[0].recipe.label}"/>
         <Label Text="{Binding Label}"/> -->
-    </VerticalStackLayout>
+
 </ContentPage>

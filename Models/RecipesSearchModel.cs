@@ -19,5 +19,5 @@ public class RecipesSearchModel
     public int from { get; set; }
     public int to { get; set; }
 
-    public IList<Hit> hits { get; set; }
+    public List<Hit> hits { get; set; }
 }
