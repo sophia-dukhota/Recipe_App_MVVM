@@ -2,6 +2,7 @@
 
 public class MainAppPageModel
 {
+    public string filterByName = string.Empty;
 
     public class Digest
     {

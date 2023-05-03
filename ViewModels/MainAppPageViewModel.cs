@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using _6002CEM_SophiaDukhota.Models;
 using _6002CEM_SophiaDukhota.Services;
+//using Android.App.AppSearch;
 
 namespace _6002CEM_SophiaDukhota.ViewModels;
 
@@ -14,59 +15,47 @@ namespace _6002CEM_SophiaDukhota.ViewModels;
 
 public class MainAppPageViewModel : BaseViewModel
 {
-    //public Models.MainAppPageModel MainAppPageModel { get; set; }
-    //public ICommand GetRecipesCommand { get; set; }
-    public Command GetRecipesCommand { get; }
+    public Models.MainAppPageModel MainAppPageModel { get; set; }
     public Models.RecipesSearchModel recipesSearchModel { get; set; }
 
     public ObservableCollection<Recipe> recipes { get; } = new();
+    public ObservableCollection<Recipe> searchResults { get; } = new();
+
     GetRecipesService getRecipesService;
 
-   /* public string Label
-    {
-        get => recipesSearchModel.hits[0].recipe.label;
-        set
-        {
-            //var hits = RecipesSearchModel.hits[0].recipe.label = value;
-            recipesSearchModel.hits[0].recipe.label = value;
-            OnPropertyChanged(nameof(Label));
-            (GetRecipesCommand as Command).ChangeCanExecute();
-        }
-    }*/
-
-    /*
-    public async Task<RecipesSearchModel> GetResponse() {
-        //api keys
-        const string appId = "8d3624e5";
-        const string appKey = "2d8e6e78e5c2ea4d0050d41ddc1761a9";
-
-        //create new HTTP client
-        var httpClient = new HttpClient();
-        httpClient.BaseAddress = new Uri("https://api.edamam.com/api/recipes/v2");
-
-        //get request
-        var request = new HttpRequestMessage(HttpMethod.Get, "/search?q=chicken&app_id=" + appId + "&app_key=" + appKey);
-        var response = await httpClient.SendAsync(request);
-        var responseString = await response.Content.ReadAsStringAsync();
-
-        //var responseModel = JsonSerializer.Deserialize<RecipesSearchModel>(responseString);
-        recipesSearchModel = JsonSerializer.Deserialize<RecipesSearchModel>(responseString);
-        //return responseModel;
-        //_recipesSearchModel.Add(recipesSearchModel);
-        return recipesSearchModel;
-    }*/
+    public Command GetRecipesCommand { get; }
+    public Command SearchByNameCommand { get; }
+    public Command TestCommand { get; }
 
     public MainAppPageViewModel(GetRecipesService getRecipesService)
     {
-        //MainAppPageModel = new Models.MainAppPageModel();
         recipesSearchModel = new Models.RecipesSearchModel();
-        //GetRecipesCommand = new Command(execute: async () => await GetResponse());
         this.getRecipesService = getRecipesService;
+        //HARDCODED Q
         GetRecipesCommand = new Command(async () => await GetRecipesAsync());
+        //SEARCH Q
+        //SearchByNameCommand = new Command(async () => await GetSearchedRecipes());
+
+        /* public ICommand PerformSearch => new Command<string>((string query) =>
+         {
+             SearchResults = DataService.GetSearchResults(query);
+         });*/
+
+        TestCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
+}
+
+    public string FilterByName
+    {
+        get => MainAppPageModel.filterByName;
+        set
+        {
+            MainAppPageModel.filterByName = value;
+            OnPropertyChanged(nameof(FilterByName));
+            //updates canExecute (ShouldCheckUserCreds)
+            //(CheckUserCredsCommand as Command).ChangeCanExecute();
+        }
     }
 
-
-    //code modified from https://www.youtube.com/watch?v=XmdBXuNPShs&t=2434s
     async Task GetRecipesAsync()
     {
         if (IsBusy)
@@ -76,7 +65,7 @@ public class MainAppPageViewModel : BaseViewModel
             IsBusy = true;
             //between here
             var getRecipes = await getRecipesService.GetResponse();
-            
+
             //and here
             if (recipes.Count != 0)
             {
@@ -94,10 +83,35 @@ public class MainAppPageViewModel : BaseViewModel
         {
             IsBusy = false;
         }
+
+    }
+
+    async Task GetSearchedRecipes(string qparam)
+    {
+        if (IsBusy)
+            return;
+        try
+        {
+            IsBusy = true;
+            //between here
+            var getRecipes = await getRecipesService.SearchRecipes(qparam);
+            
+            //and here
+            if (searchResults.Count != 0)
+            {
+                searchResults.Clear();
+            }
+
+            foreach (var recipe in getRecipes)
+                searchResults.Add(recipe);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Exception caught" + ex.Message);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 }
-/* protected override void OnAppearing()
-{
-    base.OnAppearing();
-    NavigationPage.SetHasBackButton(this, false);
-}*/

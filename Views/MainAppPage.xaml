@@ -12,93 +12,51 @@
     </ContentPage.BindingContext>
     -->
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.04*"/>
+            <RowDefinition Height="0.02*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
 
-    <!--
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button x:Name="getData"
-                Text="GetData"
-                Command="{Binding GetRecipesCommand}"/> -->
-    <Grid
-        ColumnDefinitions="*, *"
-        ColumnSpacing="5"
-        RowDefinitions="*, Auto"
-        RowSpacing="0">
+
+        <SearchBar x:Name="searchBar"
+            Grid.Row="0"
+               Grid.ColumnSpan="2"
+               BackgroundColor="White"
+               SearchCommand="{Binding TestCommand}"
+               SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+            Placeholder="Search" Margin="10"/>
+        <!--<Label Text="{Binding FilterByName}"/>-->
 
         <Button Grid.Column="0"
                 Grid.Row="1"
         x:Name="getData"
         Text="GetData"
         IsEnabled="{Binding IsNotBusy}"
-        Command="{Binding GetRecipesCommand}"/>
+        Command="{Binding SearchByNameCommand}"/>
 
-            <CollectionView ItemsSource="{Binding recipes}"
-                            Grid.ColumnSpan="2">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Recipe">
-                        <Grid Padding="10">
-                            <Frame>
-                                <Grid Padding="0" ColumnDefinitions="125, *">
-                                    <Image Aspect="AspectFill" Source="{Binding image}"/>
-                                    <StackLayout Grid.Column="1"
-                                                 Grid.RowSpan="2"
-                                                 Padding="10"
-                                                 VerticalOptions="Center">
-                                        <Label Text="{Binding label}"/>
-                                    </StackLayout>
-                                </Grid>
-                            </Frame>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <!--
-            <CollectionView ItemsSource="{Binding recipes}"
-                            Grid.ColumnSpan="2">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Recipe">
-                        <Grid Padding="10">
-                            <Frame HeightRequest="125">
-                                <Grid Padding="0" ColumnDefinitions="125, *">
-                                    <Image Aspect="AspectFill" Source="{Binding image}"
-                                           WidthRequest="125"
-                                           HeightRequest="125"/>
-                                    <StackLayout Grid.Column="1"
-                                                 Grid.RowSpan="2"
-                                                 Padding="10"
-                                                 VerticalOptions="Center">
-                                        <Label Text="{Binding label}"/>
-                                    </StackLayout>
-                                </Grid>
-                            </Frame>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            -->
-    </Grid>
-        
-
-<!--
-        <ListView ItemsSource="{Binding recipesSearchModel}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding recipesSearchModel.q}"/>
-
+        <CollectionView ItemsSource="{Binding searchResults}"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Recipe">
+                    <Grid Padding="10">
+                        <Frame>
+                            <Grid Padding="0" ColumnDefinitions="125, *">
+                                <Image Aspect="AspectFill" Source="{Binding image}"/>
+                                <StackLayout Grid.Column="1"
+                                                Grid.RowSpan="2"
+                                                Padding="10"
+                                                VerticalOptions="Center">
+                                    <Label Text="{Binding label}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
                 </DataTemplate>
-
-            </ListView.ItemTemplate>
-
-        </ListView> 
-     
-     -->
-
-        
-       <!-- <Label Text="{Binding RecipesSearchModel, Mode=TwoWay}"/>
-        <Label Text="{Binding RecipesSearchModel.hits[0].recipe.label}"/>
-        <Label Text="{Binding Label}"/> -->
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 
 </ContentPage>

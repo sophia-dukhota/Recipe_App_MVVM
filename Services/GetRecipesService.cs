@@ -32,9 +32,6 @@ public class GetRecipesService
         //get request
         var request = new HttpRequestMessage(HttpMethod.Get, "/search?q=chicken&app_id=" + appId + "&app_key=" + appKey);
         var response = await httpClient.SendAsync(request);
-
-        //string baseUrl = "https://api.edamam.com/api/recipes/v2/search?q=chicken&app_id=" + appId + "&app_key=" + appKey;
-        //var response = await httpClient.GetAsync(baseUrl);
         var responseString = await response.Content.ReadAsStringAsync();
 
         if (response.IsSuccessStatusCode)
@@ -43,17 +40,37 @@ public class GetRecipesService
             recipesList = new List<Recipe>();
             foreach (var hit in hitsList)
                 recipesList.Add(hit.recipe);
-            //recipesList = JsonSerializer.Deserialize<List<RecipesSearchModel>>(responseString);
-            //recipesList = await response.Content.ReadFromJsonAsync<List<RecipesSearchModel>>();
             Console.WriteLine(this.recipesList);
-            //return recipesList;
         }
 
         return recipesList;
+    }
 
-        //recipesSearchModel = JsonSerializer.Deserialize<RecipesSearchModel>(responseString);
-        //return responseModel;
-        //_recipesSearchModel.Add(recipesSearchModel);
-        //return recipesSearchModel;
+    public async Task<List<Recipe>> SearchRecipes(string qparam)
+    {
+        if (recipesList.Count > 0)
+        {
+            return recipesList;
+        }
+
+        httpClient.BaseAddress = new Uri("https://api.edamam.com/api/recipes/v2");
+
+
+        //get request
+        var request = new HttpRequestMessage(HttpMethod.Get,
+            "/search?q=" + qparam + "&app_id=" + appId + "&app_key=" + appKey);
+        var response = await httpClient.SendAsync(request);
+        var responseString = await response.Content.ReadAsStringAsync();
+
+        if (response.IsSuccessStatusCode)
+        {
+            var hitsList = (await response.Content.ReadFromJsonAsync<RecipesSearchModel>()).hits;
+            recipesList = new List<Recipe>();
+            foreach (var hit in hitsList)
+                recipesList.Add(hit.recipe);
+            Console.WriteLine(this.recipesList);
+        }
+
+        return recipesList;
     }
 }
