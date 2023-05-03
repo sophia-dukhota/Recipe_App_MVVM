@@ -34,16 +34,51 @@
         IsEnabled="{Binding IsNotBusy}"
         Command="{Binding GetRecipesCommand}"/>
 
-        <CollectionView ItemsSource="{Binding recipes}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:Recipe">
-                    <Label Text="{Binding label}"/>
+            <CollectionView ItemsSource="{Binding recipes}"
+                            Grid.ColumnSpan="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Recipe">
+                        <Grid Padding="10">
+                            <Frame>
+                                <Grid Padding="0" ColumnDefinitions="125, *">
+                                    <Image Aspect="AspectFill" Source="{Binding image}"/>
+                                    <StackLayout Grid.Column="1"
+                                                 Grid.RowSpan="2"
+                                                 Padding="10"
+                                                 VerticalOptions="Center">
+                                        <Label Text="{Binding label}"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-                </DataTemplate>
-
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
+            <!--
+            <CollectionView ItemsSource="{Binding recipes}"
+                            Grid.ColumnSpan="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Recipe">
+                        <Grid Padding="10">
+                            <Frame HeightRequest="125">
+                                <Grid Padding="0" ColumnDefinitions="125, *">
+                                    <Image Aspect="AspectFill" Source="{Binding image}"
+                                           WidthRequest="125"
+                                           HeightRequest="125"/>
+                                    <StackLayout Grid.Column="1"
+                                                 Grid.RowSpan="2"
+                                                 Padding="10"
+                                                 VerticalOptions="Center">
+                                        <Label Text="{Binding label}"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            -->
     </Grid>
         
 
