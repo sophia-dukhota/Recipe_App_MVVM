@@ -25,7 +25,7 @@ public class MainAppPageViewModel : BaseViewModel
 
     public Command GetRecipesCommand { get; }
     public Command SearchByNameCommand { get; }
-    public Command TestCommand { get; }
+    public Command SearchCommand { get; }
 
     public MainAppPageViewModel(GetRecipesService getRecipesService)
     {
@@ -41,7 +41,7 @@ public class MainAppPageViewModel : BaseViewModel
              SearchResults = DataService.GetSearchResults(query);
          });*/
 
-        TestCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
+        SearchCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
 }
 
     public string FilterByName

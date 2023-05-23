@@ -24,7 +24,7 @@
             Grid.Row="0"
                Grid.ColumnSpan="2"
                BackgroundColor="White"
-               SearchCommand="{Binding TestCommand}"
+               SearchCommand="{Binding SearchCommand}"
                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
             Placeholder="Search" Margin="10"/>
         <!--<Label Text="{Binding FilterByName}"/>-->
@@ -34,7 +34,7 @@
         x:Name="getData"
         Text="GetData"
         IsEnabled="{Binding IsNotBusy}"
-        Command="{Binding SearchByNameCommand}"/>
+        Command="{Binding GetRecipesCommand}"/>
 
         <CollectionView ItemsSource="{Binding searchResults}"
                         Grid.ColumnSpan="2"

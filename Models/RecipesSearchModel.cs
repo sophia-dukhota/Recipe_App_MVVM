@@ -7,6 +7,7 @@ public class Hit
 
 public class Recipe
 {
+    public string url { get; set; }
     public string uri { get; set; }
     public string image { get; set; }
     public string label { get; set; }

@@ -27,9 +27,11 @@ public class GetRecipesService
         }
 
         httpClient.BaseAddress = new Uri("https://api.edamam.com/api/recipes/v2");
-
+        //httpClient.BaseAddress = new Uri("https://api.edamam.com");
 
         //get request
+        //var request = new HttpRequestMessage(HttpMethod.Get, "/api/food-database/v2/parser" + appId + "&app_key=" + appKey);
+
         var request = new HttpRequestMessage(HttpMethod.Get, "/search?q=chicken&app_id=" + appId + "&app_key=" + appKey);
         var response = await httpClient.SendAsync(request);
         var responseString = await response.Content.ReadAsStringAsync();
