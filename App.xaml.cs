@@ -4,7 +4,7 @@ namespace _6002CEM_SophiaDukhota;
 
 public partial class App : Application
 {
-	public static Users users { get; private set; }
+	//public static Users users { get; private set; }
 
 	public App()
 	{
@@ -13,8 +13,10 @@ public partial class App : Application
 		//register routes
 		Routing.RegisterRoute("SignUpPage", typeof(Views.SignUpPage));
 		Routing.RegisterRoute("MainAppPage", typeof(Views.MainAppPage));
+        //Routing.RegisterRoute(nameof(RecipeDetailsPage), typeof(Views.RecipeDetailsPage));
+        Routing.RegisterRoute("RecipeDetailsPage", typeof(Views.RecipeDetailsPage));
 
-		MainPage = new AppShell();
+        MainPage = new AppShell();
 	}
 }
 

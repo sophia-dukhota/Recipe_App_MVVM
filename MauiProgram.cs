@@ -19,17 +19,20 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 		builder.Services.AddTransient<GetRecipesService>();
+
 		builder.Services.AddTransient<MainAppPageViewModel>();
 		builder.Services.AddTransient<MainAppPage>();
 
+		builder.Services.AddTransient<RecipeDetailsViewModel>();
+		builder.Services.AddTransient<RecipeDetailsPage>();
+		
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-		string dbPath = Path.Combine(FileSystem.AppDataDirectory, "UserDB.db");
+		/*string dbPath = Path.Combine(FileSystem.AppDataDirectory, "UserDB.db");
 		builder.Services.AddSingleton(s =>
-		ActivatorUtilities.CreateInstance<Users>(s, dbPath));
+		ActivatorUtilities.CreateInstance<Users>(s, dbPath));8*/
 
 		return builder.Build();
 	}
 }
-

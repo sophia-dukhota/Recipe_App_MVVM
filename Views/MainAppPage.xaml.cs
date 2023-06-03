@@ -19,4 +19,17 @@ public partial class MainAppPage : ContentPage
         SearchBar searchBar = (SearchBar)sender;
         //searchResults.ItemsSource = DataService.GetSearchResults(searchBar.Text);
     }
+
+    private async void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        var recipe = ((VisualElement)sender).BindingContext as Recipe;
+
+        if (recipe == null)
+            return;
+
+        await Shell.Current.GoToAsync(("RecipeDetailsPage"), true, new Dictionary<string, object>
+        {
+            {"Recipe", recipe}
+        });
+    }
 }

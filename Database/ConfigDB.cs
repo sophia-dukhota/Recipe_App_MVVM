@@ -22,11 +22,11 @@ public class ConfigDB
 
 }
 
-[Table("Users")]
+/*[Table("Users")]
 public class Users
 {
     [PrimaryKey, AutoIncrement, Column("UserID")]
     public int UserID { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
-}
+}*/

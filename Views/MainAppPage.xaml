@@ -36,6 +36,7 @@
         IsEnabled="{Binding IsNotBusy}"
         Command="{Binding GetRecipesCommand}"/>
 
+        <!-- code modified from https://www.youtube.com/watch?v=pBh5SXVSwXw-->
         <CollectionView ItemsSource="{Binding searchResults}"
                         Grid.ColumnSpan="2"
                         Grid.Row="2">
@@ -43,13 +44,16 @@
                 <DataTemplate x:DataType="model:Recipe">
                     <Grid Padding="10">
                         <Frame>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Frame.GestureRecognizers>
                             <Grid Padding="0" ColumnDefinitions="125, *">
                                 <Image Aspect="AspectFill" Source="{Binding image}"/>
                                 <StackLayout Grid.Column="1"
                                                 Grid.RowSpan="2"
                                                 Padding="10"
                                                 VerticalOptions="Center">
-                                    <Label Text="{Binding label}"/>
+                                    <Label Text="{Binding label}"/>                              
                                 </StackLayout>
                             </Grid>
                         </Frame>

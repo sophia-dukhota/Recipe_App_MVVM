@@ -3,7 +3,7 @@
 
 namespace _6002CEM_SophiaDukhota.Database;
 
-public class UserDB
+/*public class UserDB
 {
     //SQLiteAsyncConnection Database;
 
@@ -38,7 +38,7 @@ public class UserDB
     {
         conn = new SQLiteConnection(_dbPath);
         conn.Delete(new Users { UserID = id });
-    }
+    } */
 
     /*
     public void CreateTable()
@@ -62,5 +62,5 @@ public class UserDB
 
         Database = new SQLiteAsyncConnection(ConfigDB.DatabasePath, ConfigDB.Flags);
         var result = await Database.CreateTableAsync<UserDB>();
-    }*/
-}
+    }
+}*/

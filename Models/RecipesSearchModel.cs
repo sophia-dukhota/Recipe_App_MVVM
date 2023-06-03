@@ -1,14 +1,19 @@
-﻿namespace _6002CEM_SophiaDukhota.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using _6002CEM_SophiaDukhota.ViewModels;
+
+namespace _6002CEM_SophiaDukhota.Models;
 
 public class Hit
 {
     public Recipe recipe { get; set; }
 }
 
-public class Recipe
+
+//[ObservableObject]
+public partial class Recipe : ObservableObject
 {
     public string url { get; set; }
-    public string uri { get; set; }
+    //public string uri { get; set; }
     public string image { get; set; }
     public string label { get; set; }
     public string externalId { get; set; }
