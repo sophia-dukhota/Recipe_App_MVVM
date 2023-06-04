@@ -29,11 +29,69 @@
                         WidthRequest="160"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        Source="{Binding Recipe.image}"/> 
+                        Source="{Binding Recipe.image}"/>
+                </Frame>             
+            </Grid>
 
-                </Frame>
+
+            <Label Text="{Binding Recipe.label}"
+                       FontSize="Title" FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"/>
+
+            <Grid Padding="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.5*"/>
+                    <ColumnDefinition Width="2.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="2.5*"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Meal Type:" Margin="10,0,10,0" Grid.Row="0"/>
+                <Label Text="{Binding Recipe.mealType[0]}" Grid.Row="0" Grid.Column="1"/>
+
+                <Label Text="Servings:" Margin="10,0,10,0" Grid.Row="2"/>
+                <Label Text="{Binding Recipe.yield}" Grid.Row="2" Grid.Column="1"/>
+
+                <Label Text="Calories:" Margin="10,0,10,0" Grid.Row="3"/>
+                <Label Text="{Binding Recipe.calories}" Grid.Row="3" Grid.Column="1"/>
+
+                <Label Text="Cusine:" Margin="10,0,10,0" Grid.Row="4"/>
+                <Label Text="{Binding Recipe.cuisineType[0]}" Grid.Row="4" Grid.Column="1"/>
+
+                <Label Margin="10,0,10,0" Text="Original Link"
+                       VerticalOptions="Center" Grid.Row="5"
+                       TextColor="Blue" TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToURL}" CommandParameter="{Binding Recipe.url}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
 
             </Grid>
+
+
+
+
+            <!-- <TableView Intent="Data" HasUnevenRows="False">
+                <TableRoot>
+                    <TableSection>
+                        <ViewCell>
+                            <Grid RowDefinitions="Auto,Auto"
+                                ColumnDefinitions="0.5*,0.5*">
+                                <Label Grid.Column="1" Grid.Row="1" Text="Original Link"/>
+                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding Recipe.url}"/>
+                            </Grid>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView> -->
+
 
         </VerticalStackLayout>
 
