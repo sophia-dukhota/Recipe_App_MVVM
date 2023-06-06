@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="_6002CEM_SophiaDukhota.Views.RecipeDetailsPage"
              xmlns:local="clr-namespace:_6002CEM_SophiaDukhota.ViewModels"
+             xmlns:model="clr-namespace:_6002CEM_SophiaDukhota.Models"
              x:DataType="local:RecipeDetailsViewModel"
              Title="RecipeDetailsPage">
 
@@ -50,6 +51,8 @@
                     <RowDefinition Height="2.5*"/>
                     <RowDefinition Height="2.5*"/>
                     <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="2.5*"/>
+                    <RowDefinition Height="2.5*"/>
                 </Grid.RowDefinitions>
 
                 <Label Text="Meal Type:" Margin="10,0,10,0" Grid.Row="0"/>
@@ -72,10 +75,57 @@
                     </Label.GestureRecognizers>
                 </Label>
 
+                <!--<CollectionView ItemsSource="{Binding Recipe.ingredientLines}"
+                        Grid.Row="6"
+                        Grid.ColumnSpan="2">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Recipe">
+                            <Grid Padding="10">
+                                <Frame>
+                                    <Grid Padding="0" ColumnDefinitions="125, *">
+                                        <StackLayout Grid.Column="1"
+                                                Grid.RowSpan="2"
+                                                Padding="10"
+                                                VerticalOptions="Center">
+                                            <Label Text="{Binding ingredientLines}"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView> -->
+
+                <!--<ListView ItemsSource="{Binding Recipe}" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>                            
+                                    <Label
+                                       Text="{Binding Recipe.ingredientLines}" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView> -->
+
+                <!--<ListView x:Name="TestListView" Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                </ListView> -->
+                
+                <!--<ListView ItemsSource="{Binding Recipe.ingredientLines}"
+                          Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                          SelectionMode="None"
+                          SeparatorVisibility="None"/>-->
+
+                <ListView ItemsSource="{Binding Recipe}"
+                          Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Recipe.ingredientLines}"
+                                      Detail="something"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
 
             </Grid>
-
-
 
 
             <!-- <TableView Intent="Data" HasUnevenRows="False">
