@@ -10,13 +10,5 @@ public partial class RecipeDetailsPage : ContentPage
 		BindingContext = viewModel;
 		InitializeComponent();
 
-		List<string> test = new List<string>() {
-			"test1",
-			"fuckin work",
-			"pls"
-		};
-
-		//TestListView.ItemsSource = test;
-
     }
 }

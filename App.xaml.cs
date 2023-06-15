@@ -4,7 +4,21 @@ namespace _6002CEM_SophiaDukhota;
 
 public partial class App : Application
 {
-	//public static Users users { get; private set; }
+	private static UsersDB usersDB;
+
+	public static UsersDB UsersDB
+	{
+		get
+		{
+			if (usersDB == null)
+			{
+				usersDB = new UsersDB(Path.Combine(Environment.GetFolderPath(
+					Environment.SpecialFolder.LocalApplicationData), "Users.db3"));
+			}
+
+			return usersDB;
+		}
+	}
 
 	public App()
 	{

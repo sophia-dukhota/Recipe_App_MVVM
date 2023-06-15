@@ -17,7 +17,6 @@ public partial class MainAppPage : ContentPage
     void FilterByName_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
         SearchBar searchBar = (SearchBar)sender;
-        //searchResults.ItemsSource = DataService.GetSearchResults(searchBar.Text);
     }
 
     private async void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)

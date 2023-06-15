@@ -4,6 +4,7 @@
              x:Class="_6002CEM_SophiaDukhota.Views.SignUpPage"
              xmlns:local="clr-namespace:_6002CEM_SophiaDukhota.ViewModels"
              Title="SignUpPage">
+
     <ContentPage.BindingContext>
         <local:SignUpViewModel/>
     </ContentPage.BindingContext>
@@ -25,9 +26,9 @@
         </StackLayout>
 
         <StackLayout Grid.Row="1">
-            <Entry TextChanged="Username_TextChanged" Placeholder="Username" Margin="10"/>
-            <Entry TextChanged="Password_TextChanged" IsPassword="True" Placeholder="Password" Margin="10"/>
-            <Entry TextChanged="VerifyPassword_TextChanged" IsPassword="True" Placeholder="Verify Password" Margin="10"/>
+            <Entry x:Name="usernameEntry" TextChanged="Username_TextChanged" Placeholder="Username" Margin="10"/>
+            <Entry x:Name="passwordEntry" TextChanged="Password_TextChanged" IsPassword="True" Placeholder="Password" Margin="10"/>
+            <Entry x:Name="verifyPasswordEntry" TextChanged="VerifyPassword_TextChanged" IsPassword="True" Placeholder="Verify Password" Margin="10"/>
 
             <Button
                 x:Name="registerBtn"
@@ -36,11 +37,26 @@
                 Margin="10"
                 Command="{Binding RegisterUserCommand}"/>
 
-            <!-- This is for testing purposes-->
+            <Button
+                Text="Database Add"
+                Clicked="AddToDB"
+                />
+
+            <!-- This is ALL for testing purposes-->
             <Label Text="{Binding Username, Mode=TwoWay}"/>
             <Label Text="{Binding Password, Mode=TwoWay}"/>
             <Label Text="{Binding VerifyPassword, Mode=TwoWay}"/>
 
+            <CollectionView x:Name="testingSaveToDB">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding username}"/>
+                            <Label Text="{Binding password}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </Grid>
 </ContentPage>

@@ -1,9 +1,13 @@
-﻿namespace _6002CEM_SophiaDukhota.Models;
+﻿using SQLite;
+
+namespace _6002CEM_SophiaDukhota.Models;
 
 public class SignUpModel
 {
-    public string username = string.Empty;
-    public string password = string.Empty;
+    [PrimaryKey, AutoIncrement]
+    public int Id { get; set; }
+    public string username { get; set; }
+    public string password { get; set; }
     public string verifyPassword = string.Empty;
 
     public SignUpModel()

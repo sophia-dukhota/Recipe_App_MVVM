@@ -74,76 +74,13 @@
                         <TapGestureRecognizer Command="{Binding GoToURL}" CommandParameter="{Binding Recipe.url}"/>
                     </Label.GestureRecognizers>
                 </Label>
-
-                <!--<CollectionView ItemsSource="{Binding Recipe.ingredientLines}"
-                        Grid.Row="6"
-                        Grid.ColumnSpan="2">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="model:Recipe">
-                            <Grid Padding="10">
-                                <Frame>
-                                    <Grid Padding="0" ColumnDefinitions="125, *">
-                                        <StackLayout Grid.Column="1"
-                                                Grid.RowSpan="2"
-                                                Padding="10"
-                                                VerticalOptions="Center">
-                                            <Label Text="{Binding ingredientLines}"/>
-                                        </StackLayout>
-                                    </Grid>
-                                </Frame>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView> -->
-
-                <!--<ListView ItemsSource="{Binding Recipe}" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>                            
-                                    <Label
-                                       Text="{Binding Recipe.ingredientLines}" />
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView> -->
-
-                <!--<ListView x:Name="TestListView" Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                </ListView> -->
                 
-                <!--<ListView ItemsSource="{Binding Recipe.ingredientLines}"
+                <ListView ItemsSource="{Binding Recipe.ingredientLines}"
                           Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2"
                           SelectionMode="None"
-                          SeparatorVisibility="None"/>-->
-
-                <ListView ItemsSource="{Binding Recipe}"
-                          Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="2">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Recipe.ingredientLines}"
-                                      Detail="something"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
+                          SeparatorVisibility="None"
+                          IsEnabled="False"/>
             </Grid>
-
-
-            <!-- <TableView Intent="Data" HasUnevenRows="False">
-                <TableRoot>
-                    <TableSection>
-                        <ViewCell>
-                            <Grid RowDefinitions="Auto,Auto"
-                                ColumnDefinitions="0.5*,0.5*">
-                                <Label Grid.Column="1" Grid.Row="1" Text="Original Link"/>
-                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding Recipe.url}"/>
-                            </Grid>
-                        </ViewCell>
-                    </TableSection>
-                </TableRoot>
-            </TableView> -->
-
-
         </VerticalStackLayout>
-
     </ScrollView>
 </ContentPage>

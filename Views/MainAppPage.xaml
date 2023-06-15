@@ -29,12 +29,12 @@
             Placeholder="Search" Margin="10"/>
         <!--<Label Text="{Binding FilterByName}"/>-->
 
-        <Button Grid.Column="0"
+       <!-- <Button Grid.Column="0"
                 Grid.Row="1"
         x:Name="getData"
         Text="GetData"
         IsEnabled="{Binding IsNotBusy}"
-        Command="{Binding GetRecipesCommand}"/>
+        Command="{Binding GetRecipesCommand}"/> -->
 
         <!-- code modified from https://www.youtube.com/watch?v=pBh5SXVSwXw-->
         <CollectionView ItemsSource="{Binding searchResults}"

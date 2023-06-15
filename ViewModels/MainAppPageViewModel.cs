@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using _6002CEM_SophiaDukhota.Models;
 using _6002CEM_SophiaDukhota.Services;
+using Android.App.AppSearch;
 //using Android.App.AppSearch;
 
 namespace _6002CEM_SophiaDukhota.ViewModels;
@@ -19,11 +20,13 @@ public class MainAppPageViewModel : BaseViewModel
     public Models.RecipesSearchModel recipesSearchModel { get; set; }
 
     public ObservableCollection<Recipe> recipes { get; } = new();
+
     public ObservableCollection<Recipe> searchResults { get; } = new();
+    //public ObservableCollection<Recipe> searchResults;
 
     GetRecipesService getRecipesService;
 
-    public Command GetRecipesCommand { get; }
+    //public Command GetRecipesCommand { get; }
     public Command SearchByNameCommand { get; }
     public Command SearchCommand { get; }
 
@@ -32,14 +35,7 @@ public class MainAppPageViewModel : BaseViewModel
         recipesSearchModel = new Models.RecipesSearchModel();
         this.getRecipesService = getRecipesService;
         //HARDCODED Q
-        GetRecipesCommand = new Command(async () => await GetRecipesAsync());
-        //SEARCH Q
-        //SearchByNameCommand = new Command(async () => await GetSearchedRecipes());
-
-        /* public ICommand PerformSearch => new Command<string>((string query) =>
-         {
-             SearchResults = DataService.GetSearchResults(query);
-         });*/
+        //GetRecipesCommand = new Command(async () => await GetRecipesAsync());
 
         SearchCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
 }
@@ -56,7 +52,7 @@ public class MainAppPageViewModel : BaseViewModel
         }
     }
 
-    async Task GetRecipesAsync()
+    /*async Task GetRecipesAsync()
     {
         if (IsBusy)
             return;
@@ -84,7 +80,7 @@ public class MainAppPageViewModel : BaseViewModel
             IsBusy = false;
         }
 
-    }
+    }*/
 
     async Task GetSearchedRecipes(string qparam)
     {
@@ -93,10 +89,8 @@ public class MainAppPageViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            //between here
             var getRecipes = await getRecipesService.SearchRecipes(qparam);
-            
-            //and here
+
             if (searchResults.Count != 0)
             {
                 searchResults.Clear();
@@ -104,6 +98,8 @@ public class MainAppPageViewModel : BaseViewModel
 
             foreach (var recipe in getRecipes)
                 searchResults.Add(recipe);
+
+            OnPropertyChanged(nameof(searchResults));
         }
         catch (Exception ex)
         {

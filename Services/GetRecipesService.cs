@@ -52,10 +52,16 @@ public class GetRecipesService
     {
         if (recipesList.Count > 0)
         {
-            return recipesList;
+            recipesList.Clear();
+            //return recipesList;
         }
 
-        httpClient.BaseAddress = new Uri("https://api.edamam.com/api/recipes/v2");
+        if (httpClient.BaseAddress == null)
+        {
+            httpClient.BaseAddress = new Uri("https://api.edamam.com/api/recipes/v2");
+        }
+
+        //httpClient.BaseAddress = new Uri("https://api.edamam.com/api/recipes/v2");
 
 
         //get request

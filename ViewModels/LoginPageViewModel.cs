@@ -13,10 +13,6 @@ public class LoginPageViewModel : BaseViewModel
 	public ICommand CheckUserCredsCommand { get; set; }
     public ICommand GoToSignUpCommand { get; set; }
 
-    //config for salting and hashing the password
-    private const int saltSize = 32;
-    private const int iterations = 100000;
-    HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
 
     private bool _incorrectCreds;
     public bool incorrectCreds
@@ -57,20 +53,6 @@ public class LoginPageViewModel : BaseViewModel
 
     //CHANGE this to use .stringIsNullOrEmpty
     private bool ShouldCheckUserCreds() => Username != "" && Password != "";
-
-    //modified from https://code-maze.com/csharp-hashing-salting-passwords-best-practices/
-    private string HashPassword() {
-        //generates a salt of length saltSize
-        var salt = RandomNumberGenerator.GetBytes(saltSize);
-        //creates a hash byte array 
-        var hash = Rfc2898DeriveBytes.Pbkdf2(
-            Encoding.UTF8.GetBytes(Password),
-            salt,iterations, hashAlgorithm, saltSize);
-        //sets password to hexstring of hash
-        string hashedPassword = Convert.ToHexString(hash);
-        return hashedPassword;
-        //moified code end 
-    }
 
     private async Task CheckUserCreds() {
         if (Username == "Excal" && Password == "swordfish")
