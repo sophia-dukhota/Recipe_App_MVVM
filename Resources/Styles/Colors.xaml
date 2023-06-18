@@ -9,6 +9,7 @@
     <Color x:Key="Tertiary">#2B0B98</Color>
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
+
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
     <Color x:Key="Gray300">#ACACAC</Color>
@@ -17,6 +18,7 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
@@ -41,12 +43,15 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    <!-- Colour schemes slightly modified from https://learn.microsoft.com/en-us/dotnet/maui/user-interface/theming-->
+    <!-- Because I'm not a designer -->
     <!-- Light Theme-->
     
     <Color x:Key="LightPageBackgroundColor">White</Color>
-    <Color x:Key="LightNavigationBarColor">WhiteSmoke</Color>
+    <Color x:Key="LightNavigationBarColor">#2B0B98</Color>
     <Color x:Key="LightPrimaryColor">WhiteSmoke</Color>
     <Color x:Key="LightSecondaryColor">Black</Color>
+    <Color x:Key="LightTertiaryColor">#512BD4</Color>
     <Color x:Key="LightPrimaryTextColor">Black</Color>
     <Color x:Key="LightSecondaryTextColor">White</Color>
     <Color x:Key="LightTertiaryTextColor">Gray</Color>
@@ -56,8 +61,9 @@
 
     <Color x:Key="DarkPageBackgroundColor">Black</Color>
     <Color x:Key="DarkNavigationBarColor">Teal</Color>
-    <Color x:Key="DarkPrimaryColor">Teal</Color>
+    <Color x:Key="DarkPrimaryColor">Black</Color>
     <Color x:Key="DarkSecondaryColor">White</Color>
+    <Color x:Key="DarkTertiaryColor">Teal</Color>
     <Color x:Key="DarkPrimaryTextColor">White</Color>
     <Color x:Key="DarkSecondaryTextColor">White</Color>
     <Color x:Key="DarkTertiaryTextColor">WhiteSmoke</Color>

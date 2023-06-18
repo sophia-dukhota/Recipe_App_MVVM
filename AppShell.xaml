@@ -6,10 +6,10 @@
     xmlns:local="clr-namespace:_6002CEM_SophiaDukhota.Views"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="MainPage" /> -->
 
     <ShellContent
         ContentTemplate="{DataTemplate local:MainAppPage}"

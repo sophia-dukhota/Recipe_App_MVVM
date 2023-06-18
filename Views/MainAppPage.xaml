@@ -12,6 +12,8 @@
     </ContentPage.BindingContext>
     -->
 
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.04*"/>
@@ -19,6 +21,20 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
+         <StackLayout
+                x:Name="LoginView">
+                <Button 
+                    x:Name="LoginBtn"
+                    Text="Log In"
+                    SemanticProperties.Hint="Click to log in"
+                    Clicked="OnLoginClicked"
+                    HorizontalOptions="Center" />
+            </StackLayout>
+
+         <StackLayout
+                x:Name="HomeView"
+                IsVisible="false">
+         </StackLayout>
 
         <SearchBar x:Name="searchBar"
             Grid.Row="0"

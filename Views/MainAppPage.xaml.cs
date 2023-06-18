@@ -3,15 +3,34 @@ using _6002CEM_SophiaDukhota.ViewModels;
 //using Android.App.AppSearch;
 //using AndroidX.Lifecycle;
 
-namespace _6002CEM_SophiaDukhota.Views;
+using _6002CEM_SophiaDukhota.Auth0;
 
+namespace _6002CEM_SophiaDukhota.Views;
 
 public partial class MainAppPage : ContentPage
 {
-    public MainAppPage(MainAppPageViewModel mainAppPageViewModel)
+    private readonly Auth0Client auth0Client;
+
+    public MainAppPage(MainAppPageViewModel mainAppPageViewModel, Auth0Client client)
 	{
 		InitializeComponent();
         BindingContext = mainAppPageViewModel;
+        auth0Client = client;
+    }
+
+    private async void OnLoginClicked(object sender, EventArgs e)
+    {
+        var loginResult = await auth0Client.LoginAsync();
+
+        if (!loginResult.IsError)
+        {
+            LoginView.IsVisible = false;
+            HomeView.IsVisible = true;
+        }
+        else
+        {
+            await DisplayAlert("Error", loginResult.ErrorDescription, "OK");
+        }
     }
 
     void FilterByName_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
@@ -45,11 +64,19 @@ public partial class MainAppPage : ContentPage
         {
             foreach(ResourceDictionary dicts in mergedDictionaries)
             {
-                var primaryFound = dicts.TryGetValue(themeName + "PrimaryColor", out var primary);
-                if(primaryFound) { dicts["Primary"] = primary; }
+                var getBackground = dicts.TryGetValue(themeName + "PageBackgroundColor", out var background);
+                if(getBackground == true) { dicts["PageBackgroundColor"] = background; }
 
-                var secondaryFound = dicts.TryGetValue(themeName + "SecondaryColor", out var secondary);
-                if (primaryFound) { dicts["Secondary"] = secondary; }
+                //var getNavigationBarCo
+
+                var getPrimary = dicts.TryGetValue(themeName + "PrimaryColor", out var primary);
+                if(getPrimary == true) { dicts["Primary"] = primary; }
+
+                var getSecondary = dicts.TryGetValue(themeName + "SecondaryColor", out var secondary);
+                if (getSecondary == true) { dicts["Secondary"] = secondary; }
+
+                //var primaryTextFound = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
+                //if (primaryTextFound) { dicts[""]}
             } 
         }
     }
