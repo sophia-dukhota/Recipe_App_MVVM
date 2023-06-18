@@ -6,7 +6,6 @@ using System.Windows.Input;
 using System.Collections.ObjectModel;
 using _6002CEM_SophiaDukhota.Models;
 using _6002CEM_SophiaDukhota.Services;
-using Android.App.AppSearch;
 //using Android.App.AppSearch;
 
 namespace _6002CEM_SophiaDukhota.ViewModels;

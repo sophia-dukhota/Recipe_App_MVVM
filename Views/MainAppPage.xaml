@@ -23,10 +23,12 @@
         <SearchBar x:Name="searchBar"
             Grid.Row="0"
                Grid.ColumnSpan="2"
-               BackgroundColor="White"
+               BackgroundColor="{DynamicResource Primary}"
                SearchCommand="{Binding SearchCommand}"
                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
             Placeholder="Search" Margin="10"/>
+
+        <CheckBox Grid.Row="1" CheckedChanged="CheckBox_CheckedChanged"/>
         <!--<Label Text="{Binding FilterByName}"/>-->
 
        <!-- <Button Grid.Column="0"

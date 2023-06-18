@@ -41,4 +41,26 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    <!-- Light Theme-->
+    
+    <Color x:Key="LightPageBackgroundColor">White</Color>
+    <Color x:Key="LightNavigationBarColor">WhiteSmoke</Color>
+    <Color x:Key="LightPrimaryColor">WhiteSmoke</Color>
+    <Color x:Key="LightSecondaryColor">Black</Color>
+    <Color x:Key="LightPrimaryTextColor">Black</Color>
+    <Color x:Key="LightSecondaryTextColor">White</Color>
+    <Color x:Key="LightTertiaryTextColor">Gray</Color>
+    <Color x:Key="LightTransparentColor">Transparent</Color>
+
+    <!-- Dark Theme -->
+
+    <Color x:Key="DarkPageBackgroundColor">Black</Color>
+    <Color x:Key="DarkNavigationBarColor">Teal</Color>
+    <Color x:Key="DarkPrimaryColor">Teal</Color>
+    <Color x:Key="DarkSecondaryColor">White</Color>
+    <Color x:Key="DarkPrimaryTextColor">White</Color>
+    <Color x:Key="DarkSecondaryTextColor">White</Color>
+    <Color x:Key="DarkTertiaryTextColor">WhiteSmoke</Color>
+    <Color x:Key="DarkTransparentColor">Transparent</Color>
+
 </ResourceDictionary>

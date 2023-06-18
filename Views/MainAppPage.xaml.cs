@@ -31,4 +31,26 @@ public partial class MainAppPage : ContentPage
             {"Recipe", recipe}
         });
     }
+
+    void CheckBox_CheckedChanged(System.Object sender, Microsoft.Maui.Controls.CheckedChangedEventArgs e)
+    {
+        string themeName = string.Empty;
+        if(e.Value == true) { themeName = "Dark"; }
+        if(e.Value == false) { themeName = "Light"; }
+
+        Preferences.Set("Theme", themeName);
+
+        ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+        if(mergedDictionaries != null)
+        {
+            foreach(ResourceDictionary dicts in mergedDictionaries)
+            {
+                var primaryFound = dicts.TryGetValue(themeName + "PrimaryColor", out var primary);
+                if(primaryFound) { dicts["Primary"] = primary; }
+
+                var secondaryFound = dicts.TryGetValue(themeName + "SecondaryColor", out var secondary);
+                if (primaryFound) { dicts["Secondary"] = secondary; }
+            } 
+        }
+    }
 }

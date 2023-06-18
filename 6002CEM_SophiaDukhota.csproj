@@ -33,6 +33,9 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -64,6 +67,7 @@
 	  <None Remove="Interfaces\" />
 	  <None Remove="Database\" />
 	  <None Remove="Services\" />
+	  <None Remove="Themes\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Models\" />
@@ -72,5 +76,6 @@
 	  <Folder Include="Interfaces\" />
 	  <Folder Include="Database\" />
 	  <Folder Include="Services\" />
+	  <Folder Include="Themes\" />
 	</ItemGroup>
 </Project>
