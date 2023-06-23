@@ -79,6 +79,21 @@ public partial class MainAppPage : ContentPage
                 var getSecondary = dicts.TryGetValue(themeName + "SecondaryColor", out var secondary);
                 if (getSecondary == true) { dicts["Secondary"] = secondary; }
 
+                var getTertiary = dicts.TryGetValue(themeName + "TertiaryColor", out var tertiary);
+                if (getTertiary == true) { dicts["Tertiary"] = tertiary; }
+
+                var getPrimaryText = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
+                if (getPrimaryText == true) { dicts["PrimaryTextColor"] = primaryText; }
+
+                var getSecondaryText = dicts.TryGetValue(themeName + "SecondaryTextColor", out var secondaryText);
+                if (getSecondaryText == true) { dicts["SecondaryTextColor"] = secondaryText; }
+
+                var getTertiaryText = dicts.TryGetValue(themeName + "TertiaryTextColor", out var tertiaryText);
+                if (getTertiaryText == true) { dicts["TertiaryTextColor"] = tertiaryText; }
+
+                var getTransparent = dicts.TryGetValue(themeName + "TransparentColor", out var transparent);
+                if (getTransparent == true) { dicts["TransparentColor"] = transparent; }
+
                 //var primaryTextFound = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
                 //if (primaryTextFound) { dicts[""]}
             }
@@ -93,6 +108,7 @@ public partial class MainAppPage : ContentPage
         {
             //HomeView.IsVisible = false;
             //LoginView.IsVisible = true;
+            LoginBtn.IsVisible = true;
         }
         else
         {
