@@ -3,6 +3,8 @@
 public class MainAppPageModel
 {
     public string filterByName = string.Empty;
+    //public bool isHomeVisible { get; set; }
+    //public bool isAuthenticated { get; set; }
 
     public class Digest
     {

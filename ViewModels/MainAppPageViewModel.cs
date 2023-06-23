@@ -4,8 +4,10 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+
 using _6002CEM_SophiaDukhota.Models;
 using _6002CEM_SophiaDukhota.Services;
+using _6002CEM_SophiaDukhota.Auth0;
 //using Android.App.AppSearch;
 
 namespace _6002CEM_SophiaDukhota.ViewModels;
@@ -17,17 +19,16 @@ public class MainAppPageViewModel : BaseViewModel
 {
     public Models.MainAppPageModel MainAppPageModel { get; set; }
     public Models.RecipesSearchModel recipesSearchModel { get; set; }
+    private readonly Auth0Client auth0Client;
 
     public ObservableCollection<Recipe> recipes { get; } = new();
-
     public ObservableCollection<Recipe> searchResults { get; } = new();
-    //public ObservableCollection<Recipe> searchResults;
 
     GetRecipesService getRecipesService;
 
-    //public Command GetRecipesCommand { get; }
     public Command SearchByNameCommand { get; }
     public Command SearchCommand { get; }
+    public Command LoginClicked { get; }
 
     public MainAppPageViewModel(GetRecipesService getRecipesService)
     {
@@ -50,6 +51,7 @@ public class MainAppPageViewModel : BaseViewModel
             //(CheckUserCredsCommand as Command).ChangeCanExecute();
         }
     }
+
 
     /*async Task GetRecipesAsync()
     {
@@ -109,4 +111,6 @@ public class MainAppPageViewModel : BaseViewModel
             IsBusy = false;
         }
     }
+
+
 }
