@@ -36,18 +36,18 @@
                BackgroundColor="{DynamicResource Primary}"
                SearchCommand="{Binding SearchCommand}"
                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
-               IsVisible="true"
+               IsVisible="false"
             Placeholder="Search" Margin="10"/>
 
-        <CheckBox Grid.Row="2"
-
-                  CheckedChanged="CheckBox_CheckedChanged"/>
+        <CheckBox Grid.Row="2" CheckedChanged="CheckBox_CheckedChanged"/>
 
         <!-- code modified from https://www.youtube.com/watch?v=pBh5SXVSwXw-->
-        <CollectionView ItemsSource="{Binding searchResults}"
+        <CollectionView x:Name="recipeCollectView"
+                        ItemsSource="{Binding searchResults}"
                         Grid.ColumnSpan="2"
                         Grid.Row="3"
-                        BackgroundColor="{DynamicResource PageBackgroundColor}">
+                        BackgroundColor="{DynamicResource PageBackgroundColor}"
+                        IsVisible="false">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Recipe">
                     <Grid Padding="10">

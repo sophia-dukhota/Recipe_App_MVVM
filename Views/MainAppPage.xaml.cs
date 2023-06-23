@@ -25,11 +25,10 @@ public partial class MainAppPage : ContentPage
 
         if (!loginResult.IsError)
         {
-            //LoginView.IsVisible = false;
-            //HomeView.IsVisible = true;
             searchBar.IsVisible = true;
             LoginBtn.IsVisible = false;
-
+            LogoutBtn.IsVisible = true;
+            recipeCollectView.IsVisible = true;
         }
         else
         {
@@ -109,6 +108,9 @@ public partial class MainAppPage : ContentPage
             //HomeView.IsVisible = false;
             //LoginView.IsVisible = true;
             LoginBtn.IsVisible = true;
+            LogoutBtn.IsVisible = false;
+            searchBar.IsVisible = false;
+            recipeCollectView.IsVisible = false;
         }
         else
         {
