@@ -1,5 +1,6 @@
 ﻿using _6002CEM_SophiaDukhota.Models;
 using _6002CEM_SophiaDukhota.ViewModels;
+using _6002CEM_SophiaDukhota.Services;
 //using Android.App.AppSearch;
 //using AndroidX.Lifecycle;
 
@@ -11,12 +12,26 @@ public partial class MainAppPage : ContentPage
 {
     //public bool isSearchVisible { get { return false; } }
     private readonly Auth0Client auth0Client;
+    private string userID;
+    RecipesDB database;
 
     public MainAppPage(MainAppPageViewModel mainAppPageViewModel, Auth0Client client)
     {
         InitializeComponent();
         BindingContext = mainAppPageViewModel;
         auth0Client = client;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        //listView.ItemsSource = await database.GetItemsAsync();
+        if (database is null)
+            database = new RecipesDB(); // Initialize the database object if it's null
+
+        await database.Init(); // Ensure the database is initialized
+
+        listView.ItemsSource = await database.GetItemsAsync();
     }
 
     private async void OnLoginClicked(object sender, EventArgs e)
@@ -28,7 +43,9 @@ public partial class MainAppPage : ContentPage
             searchBar.IsVisible = true;
             LoginBtn.IsVisible = false;
             LogoutBtn.IsVisible = true;
-            recipeCollectView.IsVisible = true;
+            //recipeCollectView.IsVisible = true;
+
+            userID = loginResult.User.Identity.Name;
         }
         else
         {
@@ -110,7 +127,7 @@ public partial class MainAppPage : ContentPage
             LoginBtn.IsVisible = true;
             LogoutBtn.IsVisible = false;
             searchBar.IsVisible = false;
-            recipeCollectView.IsVisible = false;
+            //recipeCollectView.IsVisible = false;
         }
         else
         {

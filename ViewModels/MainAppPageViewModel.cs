@@ -20,6 +20,7 @@ public class MainAppPageViewModel : BaseViewModel
     public Models.MainAppPageModel MainAppPageModel { get; set; }
     public Models.RecipesSearchModel recipesSearchModel { get; set; }
     private readonly Auth0Client auth0Client;
+    private readonly RecipesDB _recipesDB;
 
     public ObservableCollection<Recipe> recipes { get; } = new();
     public ObservableCollection<Recipe> searchResults { get; } = new();
@@ -30,10 +31,11 @@ public class MainAppPageViewModel : BaseViewModel
     public Command SearchCommand { get; }
     public Command LoginClicked { get; }
 
-    public MainAppPageViewModel(GetRecipesService getRecipesService)
+    public MainAppPageViewModel(GetRecipesService getRecipesService, RecipesDB recipesDB)
     {
         recipesSearchModel = new Models.RecipesSearchModel();
         this.getRecipesService = getRecipesService;
+        _recipesDB = recipesDB;
         //HARDCODED Q
         //GetRecipesCommand = new Command(async () => await GetRecipesAsync());
 
@@ -90,6 +92,8 @@ public class MainAppPageViewModel : BaseViewModel
         try
         {
             IsBusy = true;
+            await _recipesDB.SaveItemAsync(new SearchHistoryItem { searchTerm = qparam }) ;
+
             var getRecipes = await getRecipesService.SearchRecipes(qparam);
 
             if (searchResults.Count != 0)
@@ -111,6 +115,4 @@ public class MainAppPageViewModel : BaseViewModel
             IsBusy = false;
         }
     }
-
-
 }

@@ -26,6 +26,8 @@ public static class MauiProgram
 
 		builder.Services.AddTransient<RecipeDetailsViewModel>();
 		builder.Services.AddTransient<RecipeDetailsPage>();
+
+		builder.Services.AddSingleton<RecipesDB>();
 		
 #if DEBUG
 		builder.Logging.AddDebug();
