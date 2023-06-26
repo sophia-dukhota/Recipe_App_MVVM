@@ -27,11 +27,15 @@ public partial class MainAppPage : ContentPage
         base.OnAppearing();
         //listView.ItemsSource = await database.GetItemsAsync();
         if (database is null)
-            database = new RecipesDB(); // Initialize the database object if it's null
+            database = new RecipesDB();
 
-        await database.Init(); // Ensure the database is initialized
+        await database.Init(); 
+        var items = await database.GetItemsAsync();
+        var searchTerms = items.Select(item => item.searchTerm).ToList();
 
-        listView.ItemsSource = await database.GetItemsAsync();
+        listView.ItemsSource = searchTerms;
+
+        //listView.ItemsSource = await database.GetItemsAsync();
     }
 
     private async void OnLoginClicked(object sender, EventArgs e)
