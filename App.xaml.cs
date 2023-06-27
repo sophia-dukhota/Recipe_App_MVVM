@@ -13,6 +13,7 @@ public partial class App : Application
 		Routing.RegisterRoute("MainAppPage", typeof(Views.MainAppPage));
         //Routing.RegisterRoute(nameof(RecipeDetailsPage), typeof(Views.RecipeDetailsPage));
         Routing.RegisterRoute("RecipeDetailsPage", typeof(Views.RecipeDetailsPage));
+		Routing.RegisterRoute("SearchHistoryPage", typeof(Views.SearchHistoryPage));
 
         MainPage = new AppShell();
 	}

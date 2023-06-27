@@ -25,9 +25,9 @@
             Title="Main Page"
             ContentTemplate="{DataTemplate local:MainAppPage}" Route="MainAppPage"/>
     </FlyoutItem>
-        <FlyoutItem Title="something part 2">
+        <FlyoutItem Title="SearchHistory">
         <ShellContent
             Title="Main Page"
-            ContentTemplate="{DataTemplate local:RecipeDetailsPage}" Route="RecipeDetailsPage"/>
+            ContentTemplate="{DataTemplate local:SearchHistoryPage}" Route="SearchHistoryPage"/>
     </FlyoutItem>
 </Shell>
