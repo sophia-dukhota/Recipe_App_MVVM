@@ -13,29 +13,13 @@ public partial class MainAppPage : ContentPage
     //public bool isSearchVisible { get { return false; } }
     private readonly Auth0Client auth0Client;
     private string userID;
-    RecipesDB database;
+    MainAppPageViewModel mainAppPageViewModel;
 
     public MainAppPage(MainAppPageViewModel mainAppPageViewModel, Auth0Client client)
     {
         InitializeComponent();
         BindingContext = mainAppPageViewModel;
         auth0Client = client;
-    }
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        //listView.ItemsSource = await database.GetItemsAsync();
-        if (database is null)
-            database = new RecipesDB();
-
-        await database.Init(); 
-        var items = await database.GetItemsAsync();
-        var searchTerms = items.Select(item => item.searchTerm).ToList();
-
-        listView.ItemsSource = searchTerms;
-
-        //listView.ItemsSource = await database.GetItemsAsync();
     }
 
     private async void OnLoginClicked(object sender, EventArgs e)
@@ -47,7 +31,7 @@ public partial class MainAppPage : ContentPage
             searchBar.IsVisible = true;
             LoginBtn.IsVisible = false;
             LogoutBtn.IsVisible = true;
-            //recipeCollectView.IsVisible = true;
+            recipeCollectView.IsVisible = true;
 
             userID = loginResult.User.Identity.Name;
         }
@@ -75,13 +59,18 @@ public partial class MainAppPage : ContentPage
         });
     }
 
-    void CheckBox_CheckedChanged(System.Object sender, Microsoft.Maui.Controls.CheckedChangedEventArgs e)
+    /*void CheckBox_CheckedChanged(System.Object sender, Microsoft.Maui.Controls.CheckedChangedEventArgs e)
     {
+
+        
         string themeName = string.Empty;
         if (e.Value == true) { themeName = "Dark"; }
         if (e.Value == false) { themeName = "Light"; }
+        
 
-        Preferences.Set("Theme", themeName);
+        mainAppPageViewModel.ChangeTheme(themeName);*/
+
+        /*Preferences.Set("Theme", themeName);
 
         ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
         if (mergedDictionaries != null)
@@ -117,8 +106,8 @@ public partial class MainAppPage : ContentPage
                 //var primaryTextFound = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
                 //if (primaryTextFound) { dicts[""]}
             }
-        }
-    }
+        }*/
+    //}
 
     private async void OnLogoutClicked(object sender, EventArgs e)
     {
@@ -131,7 +120,7 @@ public partial class MainAppPage : ContentPage
             LoginBtn.IsVisible = true;
             LogoutBtn.IsVisible = false;
             searchBar.IsVisible = false;
-            //recipeCollectView.IsVisible = false;
+            recipeCollectView.IsVisible = false;
         }
         else
         {

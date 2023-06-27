@@ -9,6 +9,5 @@ public partial class RecipeDetailsPage : ContentPage
 	{
 		BindingContext = viewModel;
 		InitializeComponent();
-
     }
 }

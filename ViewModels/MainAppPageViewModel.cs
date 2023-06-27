@@ -30,17 +30,20 @@ public class MainAppPageViewModel : BaseViewModel
     public Command SearchByNameCommand { get; }
     public Command SearchCommand { get; }
     public Command LoginClicked { get; }
+    public Command ChangeThemeCommand { get; }
+
+    //move this to model 
+    public bool isThemeBtnClicked = false;
+    public string themeName = string.Empty;
 
     public MainAppPageViewModel(GetRecipesService getRecipesService, RecipesDB recipesDB)
     {
         recipesSearchModel = new Models.RecipesSearchModel();
         this.getRecipesService = getRecipesService;
-        _recipesDB = recipesDB;
-        //HARDCODED Q
-        //GetRecipesCommand = new Command(async () => await GetRecipesAsync());
 
         SearchCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
-}
+        ChangeThemeCommand = new Command(() => ChangeTheme());
+    }
 
     public string FilterByName
     {
@@ -49,41 +52,8 @@ public class MainAppPageViewModel : BaseViewModel
         {
             MainAppPageModel.filterByName = value;
             OnPropertyChanged(nameof(FilterByName));
-            //updates canExecute (ShouldCheckUserCreds)
-            //(CheckUserCredsCommand as Command).ChangeCanExecute();
         }
     }
-
-
-    /*async Task GetRecipesAsync()
-    {
-        if (IsBusy)
-            return;
-        try
-        {
-            IsBusy = true;
-            //between here
-            var getRecipes = await getRecipesService.GetResponse();
-
-            //and here
-            if (recipes.Count != 0)
-            {
-                recipes.Clear();
-            }
-
-            foreach (var recipe in getRecipes)
-                recipes.Add(recipe);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Exception caught" + ex.Message);
-        }
-        finally
-        {
-            IsBusy = false;
-        }
-
-    }*/
 
     async Task GetSearchedRecipes(string qparam)
     {
@@ -92,7 +62,7 @@ public class MainAppPageViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            await _recipesDB.SaveItemAsync(new SearchHistoryItem { searchTerm = qparam }) ;
+            await _recipesDB.SaveItemAsync(new SearchHistoryItem { searchTerm = qparam });
 
             var getRecipes = await getRecipesService.SearchRecipes(qparam);
 
@@ -113,6 +83,52 @@ public class MainAppPageViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
+        }
+    }
+
+    public void ChangeTheme()
+    {
+
+        if (isThemeBtnClicked == false) { themeName = "Dark"; }
+        if (isThemeBtnClicked == true) { themeName = "Light";}
+        isThemeBtnClicked = !isThemeBtnClicked;
+
+        Preferences.Set("Theme", themeName);
+
+        ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+        if (mergedDictionaries != null)
+        {
+            foreach (ResourceDictionary dicts in mergedDictionaries)
+            {
+                var getBackground = dicts.TryGetValue(themeName + "PageBackgroundColor", out var background);
+                if (getBackground == true) { dicts["PageBackgroundColor"] = background; }
+
+                //var getNavigationBarCo
+
+                var getPrimary = dicts.TryGetValue(themeName + "PrimaryColor", out var primary);
+                if (getPrimary == true) { dicts["Primary"] = primary; }
+
+                var getSecondary = dicts.TryGetValue(themeName + "SecondaryColor", out var secondary);
+                if (getSecondary == true) { dicts["Secondary"] = secondary; }
+
+                var getTertiary = dicts.TryGetValue(themeName + "TertiaryColor", out var tertiary);
+                if (getTertiary == true) { dicts["Tertiary"] = tertiary; }
+
+                var getPrimaryText = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
+                if (getPrimaryText == true) { dicts["PrimaryTextColor"] = primaryText; }
+
+                var getSecondaryText = dicts.TryGetValue(themeName + "SecondaryTextColor", out var secondaryText);
+                if (getSecondaryText == true) { dicts["SecondaryTextColor"] = secondaryText; }
+
+                var getTertiaryText = dicts.TryGetValue(themeName + "TertiaryTextColor", out var tertiaryText);
+                if (getTertiaryText == true) { dicts["TertiaryTextColor"] = tertiaryText; }
+
+                var getTransparent = dicts.TryGetValue(themeName + "TransparentColor", out var transparent);
+                if (getTransparent == true) { dicts["TransparentColor"] = transparent; }
+
+                //var primaryTextFound = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
+                //if (primaryTextFound) { dicts[""]}
+            }
         }
     }
 }

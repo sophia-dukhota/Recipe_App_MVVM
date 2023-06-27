@@ -39,10 +39,13 @@
                IsVisible="false"
             Placeholder="Search" Margin="10"/>
 
-        <CheckBox Grid.Row="2" CheckedChanged="CheckBox_CheckedChanged"/>
+        <!--<CheckBox Grid.Row="2" CheckedChanged="CheckBox_CheckedChanged"/>-->
+
+        <Button Grid.Row="2" Text="ChangeTheme" Command="{Binding ChangeThemeCommand}"/>
+
 
         <!-- code modified from https://www.youtube.com/watch?v=pBh5SXVSwXw-->
-        <!--<CollectionView x:Name="recipeCollectView"
+        <CollectionView x:Name="recipeCollectView"
                         ItemsSource="{Binding searchResults}"
                         Grid.ColumnSpan="2"
                         Grid.Row="3"
@@ -71,14 +74,8 @@
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>-->
+        </CollectionView>
 
-        <ListView
-            x:Name="listView"
-            Grid.Row="3" Grid.RowSpan="2"
-            SelectionMode="None"
-            SeparatorVisibility="None"
-            IsEnabled="False"/>
 
         <Button x:Name="LogoutBtn"
             Grid.Row="4"
