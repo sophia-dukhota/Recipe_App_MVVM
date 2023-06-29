@@ -12,33 +12,13 @@ public partial class MainAppPage : ContentPage
 {
     //public bool isSearchVisible { get { return false; } }
     private readonly Auth0Client auth0Client;
-    private string userID;
+    //private string userID;
     MainAppPageViewModel mainAppPageViewModel;
 
     public MainAppPage(MainAppPageViewModel mainAppPageViewModel, Auth0Client client)
     {
         InitializeComponent();
         BindingContext = mainAppPageViewModel;
-        auth0Client = client;
-    }
-
-    private async void OnLoginClicked(object sender, EventArgs e)
-    {
-        var loginResult = await auth0Client.LoginAsync();
-
-        if (!loginResult.IsError)
-        {
-            //searchBar.IsVisible = true;
-            //LoginBtn.IsVisible = false;
-            //LogoutBtn.IsVisible = true;
-            //recipeCollectView.IsVisible = true;
-
-            userID = loginResult.User.Identity.Name;
-        }
-        else
-        {
-            await DisplayAlert("Error", loginResult.ErrorDescription, "OK");
-        }
     }
 
     void FilterByName_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)

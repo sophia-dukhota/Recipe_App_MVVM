@@ -37,8 +37,6 @@ public class MainAppPageViewModel : BaseViewModel
     //MOVE THIS TO MODEL
     public bool isThemeBtnClicked = false;
     public string themeName = string.Empty;
-    //public bool isVisibleOnLogin;
-    public bool isVisibleOnLogout = true;
 
     private MainAppPageModel mainAppPageModel = new MainAppPageModel();
 
@@ -47,6 +45,7 @@ public class MainAppPageViewModel : BaseViewModel
         mainAppPageModel = new MainAppPageModel();
         recipesSearchModel = new Models.RecipesSearchModel();
         auth0Client = client;
+        _recipesDB = recipesDB;
 
         this.getRecipesService = getRecipesService;
 
@@ -56,13 +55,13 @@ public class MainAppPageViewModel : BaseViewModel
         ChangeThemeCommand = new Command(() => ChangeTheme());
     }
 
-    public bool IsVisibleOnLogin
+    public bool IsAuthenticated
     {
-        get => mainAppPageModel.isVisibleOnLogin;
+        get => mainAppPageModel.isAuthenticated;
         set
         {
-            mainAppPageModel.isVisibleOnLogin = value;
-            OnPropertyChanged(nameof(IsVisibleOnLogin));
+            mainAppPageModel.isAuthenticated = value;
+            OnPropertyChanged(nameof(IsAuthenticated));
         }
     }
 
@@ -156,18 +155,18 @@ public class MainAppPageViewModel : BaseViewModel
 
         if (!loginResult.IsError)
         {
-            //MAKE SURE THE UI CAN SEE IT
-            IsVisibleOnLogin = true;
-            /*searchBar.IsVisible = true;
-            LoginBtn.IsVisible = false;
-            LogoutBtn.IsVisible = true;
-            recipeCollectView.IsVisible = true;*/
-
+            IsAuthenticated = true;
             userID = loginResult.User.Identity.Name;
         }
-        /*else
-        {
-            await DisplayAlert("Error", loginResult.ErrorDescription, "OK");
-        }*/
     }
+
+    /*private async Task OnLogoutClicked()
+    {
+        var logoutResult = await auth0Client.LogoutAsync();
+
+        if (!logoutResult.IsError)
+        {
+
+        }
+    }*/
 }
