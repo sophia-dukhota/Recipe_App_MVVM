@@ -39,7 +39,7 @@ public partial class MainAppPage : ContentPage
         });
     }
 
-    private async void OnLogoutClicked(object sender, EventArgs e)
+    /*private async void OnLogoutClicked(object sender, EventArgs e)
     {
         var logoutResult = await auth0Client.LogoutAsync();
 
@@ -56,5 +56,5 @@ public partial class MainAppPage : ContentPage
         {
             await DisplayAlert("Error", logoutResult.ErrorDescription, "OK");
         }
-    }
+    }*/
 }

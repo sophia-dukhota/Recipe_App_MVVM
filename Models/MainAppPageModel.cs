@@ -4,7 +4,7 @@ public class MainAppPageModel
 {
     public string filterByName = string.Empty;
     public bool isAuthenticated = false;
-    public bool isVisibleOnLogout = true;
+    public bool isNotAuthenticated = true;
 
     public class Digest
     {

@@ -27,9 +27,10 @@ public class MainAppPageViewModel : BaseViewModel
 
     GetRecipesService getRecipesService;
 
-    public Command SearchByNameCommand { get; }
-    public Command SearchCommand { get; }
     public Command OnLoginClickedCommand { get; }
+    public Command OnLogoutClickedCommand { get; }
+    //public Command SearchByNameCommand { get; }
+    public Command SearchCommand { get; }
     public Command ChangeThemeCommand { get; }
 
     private string userID;
@@ -49,10 +50,11 @@ public class MainAppPageViewModel : BaseViewModel
 
         this.getRecipesService = getRecipesService;
 
-
-        SearchCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
         OnLoginClickedCommand = new Command(async () => await OnLoginClicked());
+        OnLogoutClickedCommand = new Command(async () => await OnLogoutClicked());
+        SearchCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
         ChangeThemeCommand = new Command(() => ChangeTheme());
+
     }
 
     public bool IsAuthenticated
@@ -62,6 +64,16 @@ public class MainAppPageViewModel : BaseViewModel
         {
             mainAppPageModel.isAuthenticated = value;
             OnPropertyChanged(nameof(IsAuthenticated));
+        }
+    }
+
+    public bool IsNotAuthenticated
+    {
+        get => mainAppPageModel.isNotAuthenticated;
+        set
+        {
+            mainAppPageModel.isNotAuthenticated = value;
+            OnPropertyChanged(nameof(IsNotAuthenticated));
         }
     }
 
@@ -123,8 +135,6 @@ public class MainAppPageViewModel : BaseViewModel
                 var getBackground = dicts.TryGetValue(themeName + "PageBackgroundColor", out var background);
                 if (getBackground == true) { dicts["PageBackgroundColor"] = background; }
 
-                //var getNavigationBarCo
-
                 var getPrimary = dicts.TryGetValue(themeName + "PrimaryColor", out var primary);
                 if (getPrimary == true) { dicts["Primary"] = primary; }
 
@@ -156,17 +166,19 @@ public class MainAppPageViewModel : BaseViewModel
         if (!loginResult.IsError)
         {
             IsAuthenticated = true;
+            IsNotAuthenticated = false;
             userID = loginResult.User.Identity.Name;
         }
     }
 
-    /*private async Task OnLogoutClicked()
+    private async Task OnLogoutClicked()
     {
         var logoutResult = await auth0Client.LogoutAsync();
 
         if (!logoutResult.IsError)
         {
-
+            IsNotAuthenticated = true;
+            IsAuthenticated = false;
         }
-    }*/
+    }
 }

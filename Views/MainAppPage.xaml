@@ -25,7 +25,7 @@
                     Grid.Row="0"
                     Text="Log In"
                     BackgroundColor="{DynamicResource Primary}"
-                    IsVisible="true"
+                    IsVisible="{Binding IsNotAuthenticated}"
                     SemanticProperties.Hint="Click to log in"
                     Command="{Binding OnLoginClickedCommand}"
                     HorizontalOptions= "Center"
@@ -83,7 +83,7 @@
             BackgroundColor="{DynamicResource Primary}"
             Text="Log Out"
             SemanticProperties.Hint="Click to log out"
-            Clicked="OnLogoutClicked"
+            Command="{Binding OnLogoutClickedCommand}"
             HorizontalOptions="Center"
             IsVisible="{Binding IsAuthenticated}"
             Margin="10,0,0,10"/>
