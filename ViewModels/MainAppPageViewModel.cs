@@ -29,28 +29,49 @@ public class MainAppPageViewModel : BaseViewModel
 
     public Command SearchByNameCommand { get; }
     public Command SearchCommand { get; }
-    public Command LoginClicked { get; }
+    public Command OnLoginClickedCommand { get; }
     public Command ChangeThemeCommand { get; }
 
-    //move this to model 
+    private string userID;
+
+    //MOVE THIS TO MODEL
     public bool isThemeBtnClicked = false;
     public string themeName = string.Empty;
+    //public bool isVisibleOnLogin;
+    public bool isVisibleOnLogout = true;
 
-    public MainAppPageViewModel(GetRecipesService getRecipesService, RecipesDB recipesDB)
+    private MainAppPageModel mainAppPageModel = new MainAppPageModel();
+
+    public MainAppPageViewModel(GetRecipesService getRecipesService, RecipesDB recipesDB, Auth0Client client)
     {
+        mainAppPageModel = new MainAppPageModel();
         recipesSearchModel = new Models.RecipesSearchModel();
+        auth0Client = client;
+
         this.getRecipesService = getRecipesService;
 
+
         SearchCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
+        OnLoginClickedCommand = new Command(async () => await OnLoginClicked());
         ChangeThemeCommand = new Command(() => ChangeTheme());
+    }
+
+    public bool IsVisibleOnLogin
+    {
+        get => mainAppPageModel.isVisibleOnLogin;
+        set
+        {
+            mainAppPageModel.isVisibleOnLogin = value;
+            OnPropertyChanged(nameof(IsVisibleOnLogin));
+        }
     }
 
     public string FilterByName
     {
-        get => MainAppPageModel.filterByName;
+        get => mainAppPageModel.filterByName;
         set
         {
-            MainAppPageModel.filterByName = value;
+            mainAppPageModel.filterByName = value;
             OnPropertyChanged(nameof(FilterByName));
         }
     }
@@ -90,7 +111,7 @@ public class MainAppPageViewModel : BaseViewModel
     {
 
         if (isThemeBtnClicked == false) { themeName = "Dark"; }
-        if (isThemeBtnClicked == true) { themeName = "Light";}
+        if (isThemeBtnClicked == true) { themeName = "Light"; }
         isThemeBtnClicked = !isThemeBtnClicked;
 
         Preferences.Set("Theme", themeName);
@@ -125,10 +146,28 @@ public class MainAppPageViewModel : BaseViewModel
 
                 var getTransparent = dicts.TryGetValue(themeName + "TransparentColor", out var transparent);
                 if (getTransparent == true) { dicts["TransparentColor"] = transparent; }
-
-                //var primaryTextFound = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
-                //if (primaryTextFound) { dicts[""]}
             }
         }
+    }
+
+    private async Task OnLoginClicked()
+    {
+        var loginResult = await auth0Client.LoginAsync();
+
+        if (!loginResult.IsError)
+        {
+            //MAKE SURE THE UI CAN SEE IT
+            IsVisibleOnLogin = true;
+            /*searchBar.IsVisible = true;
+            LoginBtn.IsVisible = false;
+            LogoutBtn.IsVisible = true;
+            recipeCollectView.IsVisible = true;*/
+
+            userID = loginResult.User.Identity.Name;
+        }
+        /*else
+        {
+            await DisplayAlert("Error", loginResult.ErrorDescription, "OK");
+        }*/
     }
 }

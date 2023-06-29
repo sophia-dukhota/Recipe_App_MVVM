@@ -28,10 +28,10 @@ public partial class MainAppPage : ContentPage
 
         if (!loginResult.IsError)
         {
-            searchBar.IsVisible = true;
-            LoginBtn.IsVisible = false;
-            LogoutBtn.IsVisible = true;
-            recipeCollectView.IsVisible = true;
+            //searchBar.IsVisible = true;
+            //LoginBtn.IsVisible = false;
+            //LogoutBtn.IsVisible = true;
+            //recipeCollectView.IsVisible = true;
 
             userID = loginResult.User.Identity.Name;
         }
@@ -59,56 +59,6 @@ public partial class MainAppPage : ContentPage
         });
     }
 
-    /*void CheckBox_CheckedChanged(System.Object sender, Microsoft.Maui.Controls.CheckedChangedEventArgs e)
-    {
-
-        
-        string themeName = string.Empty;
-        if (e.Value == true) { themeName = "Dark"; }
-        if (e.Value == false) { themeName = "Light"; }
-        
-
-        mainAppPageViewModel.ChangeTheme(themeName);*/
-
-        /*Preferences.Set("Theme", themeName);
-
-        ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-        if (mergedDictionaries != null)
-        {
-            foreach (ResourceDictionary dicts in mergedDictionaries)
-            {
-                var getBackground = dicts.TryGetValue(themeName + "PageBackgroundColor", out var background);
-                if (getBackground == true) { dicts["PageBackgroundColor"] = background; }
-
-                //var getNavigationBarCo
-
-                var getPrimary = dicts.TryGetValue(themeName + "PrimaryColor", out var primary);
-                if (getPrimary == true) { dicts["Primary"] = primary; }
-
-                var getSecondary = dicts.TryGetValue(themeName + "SecondaryColor", out var secondary);
-                if (getSecondary == true) { dicts["Secondary"] = secondary; }
-
-                var getTertiary = dicts.TryGetValue(themeName + "TertiaryColor", out var tertiary);
-                if (getTertiary == true) { dicts["Tertiary"] = tertiary; }
-
-                var getPrimaryText = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
-                if (getPrimaryText == true) { dicts["PrimaryTextColor"] = primaryText; }
-
-                var getSecondaryText = dicts.TryGetValue(themeName + "SecondaryTextColor", out var secondaryText);
-                if (getSecondaryText == true) { dicts["SecondaryTextColor"] = secondaryText; }
-
-                var getTertiaryText = dicts.TryGetValue(themeName + "TertiaryTextColor", out var tertiaryText);
-                if (getTertiaryText == true) { dicts["TertiaryTextColor"] = tertiaryText; }
-
-                var getTransparent = dicts.TryGetValue(themeName + "TransparentColor", out var transparent);
-                if (getTransparent == true) { dicts["TransparentColor"] = transparent; }
-
-                //var primaryTextFound = dicts.TryGetValue(themeName + "PrimaryTextColor", out var primaryText);
-                //if (primaryTextFound) { dicts[""]}
-            }
-        }*/
-    //}
-
     private async void OnLogoutClicked(object sender, EventArgs e)
     {
         var logoutResult = await auth0Client.LogoutAsync();
@@ -128,4 +78,3 @@ public partial class MainAppPage : ContentPage
         }
     }
 }
-

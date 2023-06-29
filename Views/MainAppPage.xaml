@@ -25,18 +25,20 @@
                     Grid.Row="0"
                     Text="Log In"
                     BackgroundColor="{DynamicResource Primary}"
+                    IsVisible="true"
                     SemanticProperties.Hint="Click to log in"
-                    Clicked="OnLoginClicked"
+                    Command="{Binding OnLoginClickedCommand}"
                     HorizontalOptions= "Center"
                     Margin="10,10,0,0"/>
 
+                    <!--Command="{Binding OnLoginClickedCommand}"-->
         <SearchBar x:Name="searchBar"
                Grid.Row="1"
                Grid.ColumnSpan="2"
                BackgroundColor="{DynamicResource Primary}"
                SearchCommand="{Binding SearchCommand}"
                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
-               IsVisible="false"
+               IsVisible="{Binding IsVisibleOnLogin}"
             Placeholder="Search" Margin="10"/>
 
         <!--<CheckBox Grid.Row="2" CheckedChanged="CheckBox_CheckedChanged"/>-->
@@ -50,7 +52,7 @@
                         Grid.ColumnSpan="2"
                         Grid.Row="3"
                         BackgroundColor="{DynamicResource PageBackgroundColor}"
-                        IsVisible="false">
+                        IsVisible="{Binding IsVisibleOnLogin}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Recipe">
                     <Grid Padding="10">
@@ -84,7 +86,7 @@
             SemanticProperties.Hint="Click to log out"
             Clicked="OnLogoutClicked"
             HorizontalOptions="Center"
-            IsVisible="false"
+            IsVisible="{Binding IsVisibleOnLogin}"
             Margin="10,0,0,10"/>
 
     </Grid>
