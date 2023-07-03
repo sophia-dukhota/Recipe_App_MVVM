@@ -6,11 +6,6 @@
              xmlns:local="clr-namespace:_6002CEM_SophiaDukhota.ViewModels"
              x:DataType="local:MainAppPageViewModel"
              Title="Main Page">
-<!--
-    <ContentPage.BindingContext>
-        <local:MainAppPageViewModel/>
-    </ContentPage.BindingContext>
-    -->
 
     <Grid BackgroundColor="{DynamicResource PageBackgroundColor}">
         <Grid.RowDefinitions>
@@ -56,10 +51,17 @@
                 <DataTemplate x:DataType="model:Recipe">
                     <Grid Padding="10">
                         <Frame BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+                            <!-- HERE IS THE ISSUE OFFICER -->
+
+                                <!--<TapGestureRecognizer Command="{Binding GetTappedRecipeInfo}" CommandParameter="{Binding BindingContext, Source={x:Reference recipeGrid}}"/> -->
+                                 <!--<TapGestureRecognizer Command="{Binding Source={x:Reference MainAppPage}
+                                                       Path GetTappedRecipeInfoCommand.}"
+                                          CommandParameter="{Binding .}"/> -->
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
-                            </Frame.GestureRecognizers>
-                            <Grid Padding="0" ColumnDefinitions="125, *">
+                            </Frame.GestureRecognizers> 
+                            <Grid x:Name="recipeGrid" Padding="0" ColumnDefinitions="125, *">
                                 <Image Aspect="AspectFill" Source="{Binding image}"/>
                                 <StackLayout Grid.Column="1"
                                                 Grid.RowSpan="2"

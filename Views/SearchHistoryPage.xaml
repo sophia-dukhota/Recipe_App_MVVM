@@ -2,16 +2,47 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="_6002CEM_SophiaDukhota.Views.SearchHistoryPage"
+             xmlns:local="clr-namespace:_6002CEM_SophiaDukhota.ViewModels"
+             xmlns:Database="clr-namespace:_6002CEM_SophiaDukhota.Services"
+             x:DataType="local:SearchHistoryViewModel"
              Title="SearchHistoryPage">
+<ScrollView>
+    <Grid>
 
-    <ScrollView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="65"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <ListView
+       <SearchBar x:Name="searchBar"
+               Grid.Row="0"
+               Grid.ColumnSpan="2"
+               BackgroundColor="{DynamicResource Primary}"
+               SearchCommand="{Binding GetSearchedHistoryCommand}"
+               SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+            Placeholder="Search" Margin="10"/>
+
+       <Button Grid.Row="1"
+            Command="{Binding DeleteAllHistoryCommand}"
+                Text="Delete History"/>
+
+        <!--<Button Grid.Row="1"
+            Command="{Binding SearchInMainPageCommand}"
+                Text="Search"/>-->
+
+                       <!--SearchCommand="{Binding SearchCommand}"
+               SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"-->
+
+       <ListView
+            Grid.Row="2"
             x:Name="listView"
-            Grid.Row="3" Grid.RowSpan="2"
+            BackgroundColor="{DynamicResource PageBackgroundColor}"
+            ItemsSource="{Binding searchTerms}"
             SelectionMode="None"
             SeparatorVisibility="None"
             IsEnabled="False"/>
+    </Grid>
+</ScrollView>
 
-    </ScrollView>
 </ContentPage>

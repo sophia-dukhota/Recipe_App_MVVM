@@ -7,6 +7,11 @@
              x:DataType="local:RecipeDetailsViewModel"
              Title="RecipeDetailsPage">
 
+    <ContentPage.BindingContext>
+        <local:RecipeDetailsViewModel/>
+    </ContentPage.BindingContext>
+
+
     <ScrollView>
         <VerticalStackLayout>
             <Grid ColumnDefinitions="*, Auto, *" RowDefinitions="160, Auto">
@@ -33,7 +38,6 @@
                         Source="{Binding Recipe.image}"/>
                 </Frame>             
             </Grid>
-
 
             <Label Text="{Binding Recipe.label}"
                        FontSize="Title" FontAttributes="Bold"

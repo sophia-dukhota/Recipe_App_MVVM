@@ -24,7 +24,7 @@ public static class MauiProgram
 
         builder.Services.AddTransient<GetRecipesService>();
 
-        builder.Services.AddTransient<MainAppPageViewModel>();
+        builder.Services.AddSingleton<MainAppPageViewModel>();
 		builder.Services.AddTransient<MainAppPage>();
 
 		builder.Services.AddTransient<RecipeDetailsViewModel>();

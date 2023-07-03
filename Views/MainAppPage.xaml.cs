@@ -10,20 +10,12 @@ namespace _6002CEM_SophiaDukhota.Views;
 
 public partial class MainAppPage : ContentPage
 {
-    //public bool isSearchVisible { get { return false; } }
-    private readonly Auth0Client auth0Client;
-    //private string userID;
     MainAppPageViewModel mainAppPageViewModel;
 
-    public MainAppPage(MainAppPageViewModel mainAppPageViewModel, Auth0Client client)
+    public MainAppPage(MainAppPageViewModel mainAppPageViewModel)
     {
         InitializeComponent();
         BindingContext = mainAppPageViewModel;
-    }
-
-    void FilterByName_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
-    {
-        SearchBar searchBar = (SearchBar)sender;
     }
 
     private async void TapGestureRecognizer_Tapped(System.Object sender, Microsoft.Maui.Controls.TappedEventArgs e)
@@ -38,23 +30,4 @@ public partial class MainAppPage : ContentPage
             {"Recipe", recipe}
         });
     }
-
-    /*private async void OnLogoutClicked(object sender, EventArgs e)
-    {
-        var logoutResult = await auth0Client.LogoutAsync();
-
-        if (!logoutResult.IsError)
-        {
-            //HomeView.IsVisible = false;
-            //LoginView.IsVisible = true;
-            LoginBtn.IsVisible = true;
-            LogoutBtn.IsVisible = false;
-            searchBar.IsVisible = false;
-            recipeCollectView.IsVisible = false;
-        }
-        else
-        {
-            await DisplayAlert("Error", logoutResult.ErrorDescription, "OK");
-        }
-    }*/
 }

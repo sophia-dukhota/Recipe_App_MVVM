@@ -26,16 +26,23 @@ public class RecipesDB
         return await Database.InsertAsync(itemModel);
     }
 
-    /*public async Task List<SearchHistoryItem> GetItemsAsync()
-    {
-        await Init();
-        return Database.Table<SearchHistoryItem>().ToListAsync();
-    }*/
-
     public async Task<IEnumerable<SearchHistoryItem>> GetItemsAsync()
     {
         await Init();
         var items = await Database.Table<SearchHistoryItem>().ToListAsync();
         return items;
+    }
+
+    public async Task<IEnumerable<SearchHistoryItem>>GetSearchedItems(string qparm)
+    {
+        await Init();
+        var item = await Database.Table<SearchHistoryItem>().Where(i => i.searchTerm == qparm).ToListAsync();
+        return item;
+    }
+
+    public async Task DeleteDatabase()
+    {
+        await Init();
+        await Database.DeleteAllAsync<SearchHistoryItem>();
     }
 }

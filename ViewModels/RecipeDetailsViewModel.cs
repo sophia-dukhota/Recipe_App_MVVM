@@ -7,7 +7,6 @@ namespace _6002CEM_SophiaDukhota.ViewModels;
 [QueryProperty(nameof(Recipe), "Recipe")]
 public partial class RecipeDetailsViewModel : BaseViewModel
 {
-    //public ICommand GoToURL { get; }
 
     public ICommand GoToURL => new Command<string>(async (url) => await Launcher.OpenAsync(url));
 

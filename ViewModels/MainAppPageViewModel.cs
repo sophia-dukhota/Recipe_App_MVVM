@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 using _6002CEM_SophiaDukhota.Models;
 using _6002CEM_SophiaDukhota.Services;
@@ -12,10 +13,8 @@ using _6002CEM_SophiaDukhota.Auth0;
 
 namespace _6002CEM_SophiaDukhota.ViewModels;
 
-//YOU MUST GIVE EDAMAN CREDIT
-//https://developer.edamam.com/attribution
-
-public class MainAppPageViewModel : BaseViewModel
+[QueryProperty(nameof(Ingredient), "ingredient")]
+public partial class MainAppPageViewModel : BaseViewModel
 {
     public Models.MainAppPageModel MainAppPageModel { get; set; }
     public Models.RecipesSearchModel recipesSearchModel { get; set; }
@@ -29,9 +28,9 @@ public class MainAppPageViewModel : BaseViewModel
 
     public Command OnLoginClickedCommand { get; }
     public Command OnLogoutClickedCommand { get; }
-    //public Command SearchByNameCommand { get; }
     public Command SearchCommand { get; }
     public Command ChangeThemeCommand { get; }
+    public Command GetTappedRecipeInfoCommand { get; }
 
     private string userID;
 
@@ -40,6 +39,10 @@ public class MainAppPageViewModel : BaseViewModel
     public string themeName = string.Empty;
 
     private MainAppPageModel mainAppPageModel = new MainAppPageModel();
+
+
+    [ObservableProperty]
+    Ingredient ingredient;
 
     public MainAppPageViewModel(GetRecipesService getRecipesService, RecipesDB recipesDB, Auth0Client client)
     {
@@ -54,7 +57,7 @@ public class MainAppPageViewModel : BaseViewModel
         OnLogoutClickedCommand = new Command(async () => await OnLogoutClicked());
         SearchCommand = new Command<string>(async (string qparam) => { await GetSearchedRecipes(qparam); });
         ChangeThemeCommand = new Command(() => ChangeTheme());
-
+        GetTappedRecipeInfoCommand = new Command<Recipe>(async (Recipe recipe) => await GetTappedRecipeInfo(recipe));
     }
 
     public bool IsAuthenticated
@@ -157,6 +160,17 @@ public class MainAppPageViewModel : BaseViewModel
                 if (getTransparent == true) { dicts["TransparentColor"] = transparent; }
             }
         }
+    }
+
+    private async Task GetTappedRecipeInfo(Recipe recipe)
+    {
+        if (recipe == null)
+            return;
+
+        await Shell.Current.GoToAsync(("RecipeDetailsPage"), true, new Dictionary<string, object>
+        {
+            {"Recipe", recipe}
+        });
     }
 
     private async Task OnLoginClicked()

@@ -1,20 +1,23 @@
 ﻿using _6002CEM_SophiaDukhota.Services;
+using _6002CEM_SophiaDukhota.ViewModels;
 
 namespace _6002CEM_SophiaDukhota.Views;
 
 public partial class SearchHistoryPage : ContentPage
 {
     RecipesDB database;
+    public SearchHistoryViewModel searchHistoryViewModel;
 
-    public SearchHistoryPage()
+    public SearchHistoryPage(SearchHistoryViewModel searchHistoryViewModel)
 	{
 		InitializeComponent();
+        BindingContext = searchHistoryViewModel;
 	}
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        //listView.ItemsSource = await database.GetItemsAsync();
+        //await searchHistoryViewModel.InitialiseDB();
         if (database is null)
             database = new RecipesDB();
 
@@ -23,7 +26,5 @@ public partial class SearchHistoryPage : ContentPage
         var searchTerms = items.Select(item => item.searchTerm).ToList();
 
         listView.ItemsSource = searchTerms;
-
-        //listView.ItemsSource = await database.GetItemsAsync();
     }
 }
